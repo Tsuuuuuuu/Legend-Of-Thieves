@@ -1,0 +1,25 @@
+UPDATE[0.1.0]
+Due to program runtime and lag 1 fix has been made.
+Program update includes a sleep timer for each function change (including Login, Mode select, menu, level start)
+
+
+UPDATE[2.2.1]
+XP and LVL glitch fixed.
+
+Shop added: Includes Small potion, meduim and large, buying will add the one of your choice to your inventory. Can only be used if the player owns 1 or more of the item.
+- Story Mode
+- Shop
+
+Ascii added to each menu for extra style.
+
+
+UPDATE[2.3.2]
+
+Shop glitch fixed, this did cause another glitch, the coins display on the main menu appears as 500.
+This bug is soon to be fixed, when it is, you will be notified in the afternoon post.
+
+UPDATE[3.1.4]
+
+Element changing option added to game menu along with spacing fix in weapon Shop
+Coin bug fixed
+Weapons added along with mana fix
