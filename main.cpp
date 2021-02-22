@@ -286,6 +286,279 @@ int LvlUp(int XP, int Lvl){
 							}
 						}
 					}
+
+										if(weaponshopChoice == "2"){
+						ClearScreen();
+						cout << weapons.item1 << endl;
+						cout << "Price: " << weapons.price2 << endl;
+						cout << "(a) Confirm" << endl;
+						cout << "(b) cancel" << endl;
+						cin >> weaponshopChoice;
+						if(weaponshopChoice == "b"){
+							ClearScreen();
+							cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+						}
+						if(weaponshopChoice == "a"){
+							ClearScreen();
+						cout << "Enter your password: ";
+							cin >> weaponshopChoice;
+							if(weaponshopChoice == password){
+								// Player waepon is that weapon.
+							}
+							if(weaponshopChoice != password){
+								cout << "password invalid!";
+								sleep(2);
+								ClearScreen();
+											cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+							}
+						}
+					}
+
+										if(weaponshopChoice == "3"){
+						ClearScreen();
+						cout << weapons.item3 << endl;
+						cout << "Price: " << weapons.price1 << endl;
+						cout << "(a) Confirm" << endl;
+						cout << "(b) cancel" << endl;
+						cin >> weaponshopChoice;
+						if(weaponshopChoice == "b"){
+							ClearScreen();
+							cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+						}
+						if(weaponshopChoice == "a"){
+							ClearScreen();
+						cout << "Enter your password: ";
+							cin >> weaponshopChoice;
+							if(weaponshopChoice == password){
+								// Player waepon is that weapon.
+							}
+							if(weaponshopChoice != password){
+								cout << "password invalid!";
+								sleep(2);
+								ClearScreen();
+											cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+							}
+						}
+					}
+
+										if(weaponshopChoice == "4"){
+						ClearScreen();
+						cout << weapons.item1 << endl;
+						cout << "Price: " << weapons.price4 << endl;
+						cout << "(a) Confirm" << endl;
+						cout << "(b) cancel" << endl;
+						cin >> weaponshopChoice;
+						if(weaponshopChoice == "b"){
+							ClearScreen();
+							cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+						}
+						if(weaponshopChoice == "a"){
+							ClearScreen();
+						cout << "Enter your password: ";
+							cin >> weaponshopChoice;
+							if(weaponshopChoice == password){
+								// Player waepon is that weapon.
+							}
+							if(weaponshopChoice != password){
+								cout << "password invalid!";
+								sleep(2);
+								ClearScreen();
+											cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+							}
+						}
+					}
+
+										if(weaponshopChoice == "5"){
+						ClearScreen();
+						cout << weapons.item1 << endl;
+						cout << "Price: " << weapons.price5 << endl;
+						cout << "(a) Confirm" << endl;
+						cout << "(b) cancel" << endl;
+						cin >> weaponshopChoice;
+						if(weaponshopChoice == "b"){
+							ClearScreen();
+							cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+						}
+						if(weaponshopChoice == "a"){
+							ClearScreen();
+						cout << "Enter your password: ";
+							cin >> weaponshopChoice;
+							if(weaponshopChoice == password){
+								// Player waepon is that weapon.
+							}
+							if(weaponshopChoice != password){
+								cout << "password invalid!";
+								sleep(2);
+								ClearScreen();
+											cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+							}
+						}
+					}
+
+										if(weaponshopChoice == "1"){
+						ClearScreen();
+						cout << weapons.item1 << endl;
+						cout << "Price: " << weapons.price1 << endl;
+						cout << "(a) Confirm" << endl;
+						cout << "(b) cancel" << endl;
+						cin >> weaponshopChoice;
+						if(weaponshopChoice == "b"){
+							ClearScreen();
+							cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+						}
+						if(weaponshopChoice == "a"){
+							ClearScreen();
+						cout << "Enter your password: ";
+							cin >> weaponshopChoice;
+							if(weaponshopChoice == password){
+								// Player waepon is that weapon.
+							}
+							if(weaponshopChoice != password){
+								cout << "password invalid!";
+								sleep(2);
+								ClearScreen();
+											cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+							}
+						}
+					}
+
+										if(weaponshopChoice == "1"){
+						ClearScreen();
+						cout << weapons.item1 << endl;
+						cout << "Price: " << weapons.price1 << endl;
+						cout << "(a) Confirm" << endl;
+						cout << "(b) cancel" << endl;
+						cin >> weaponshopChoice;
+						if(weaponshopChoice == "b"){
+							ClearScreen();
+							cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+						}
+						if(weaponshopChoice == "a"){
+							ClearScreen();
+						cout << "Enter your password: ";
+							cin >> weaponshopChoice;
+							if(weaponshopChoice == password){
+								// Player waepon is that weapon.
+							}
+							if(weaponshopChoice != password){
+								cout << "password invalid!";
+								sleep(2);
+								ClearScreen();
+											cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+							}
+						}
+					}
+
+										if(weaponshopChoice == "1"){
+						ClearScreen();
+						cout << weapons.item1 << endl;
+						cout << "Price: " << weapons.price1 << endl;
+						cout << "(a) Confirm" << endl;
+						cout << "(b) cancel" << endl;
+						cin >> weaponshopChoice;
+						if(weaponshopChoice == "b"){
+							ClearScreen();
+							cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+						}
+						if(weaponshopChoice == "a"){
+							ClearScreen();
+						cout << "Enter your password: ";
+							cin >> weaponshopChoice;
+							if(weaponshopChoice == password){
+								// Player waepon is that weapon.
+							}
+							if(weaponshopChoice != password){
+								cout << "password invalid!";
+								sleep(2);
+								ClearScreen();
+											cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
+							}
+						}
+					}
 					
 			}
 		}
