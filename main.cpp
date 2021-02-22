@@ -769,6 +769,15 @@ if(weapons.item1 == weapons.equippedItem1){
  playerAttacks.attack6 = "Spin slash";
  playerAttacks.attack7="Slicing combo";
 }
+	if(weapons.item2 == weapons.equippedItem2){
+	// Sword attacks
+	playerAttacks.attack5 = "Rush Pierce";
+	playerAttacks.attack6 = "Core Slash";
+	playerAttacks.attack7 = "Divine Burst";
+}
+	if(weapons.item3 == weapons.equippedItem3){
+		playerAttacks.attack5 = 	
+	}
 
 
 	playerAttacks.damageAttack1 = 10;
