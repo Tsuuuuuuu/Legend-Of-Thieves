@@ -21,5 +21,5 @@ This bug is soon to be fixed, when it is, you will be notified in the afternoon 
 UPDATE[3.1.4]
 
 Element changing option added to game menu along with spacing fix in weapon Shop
-Coin bug fixed
-Weapons added along with mana fix
+Coin bug fixed.
+Weapons added along with mana fix.
