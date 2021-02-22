@@ -25,6 +25,7 @@ using namespace std;
 /*
 Declaring functions
 */
+int main();
 void Menu();
 void Login();
 void LevelStart();
@@ -247,7 +248,9 @@ int LvlUp(int XP, int Lvl){
 				while(ui == 100){
 
 					if(weaponshopChoice == 1){
-						
+						ClearScreen();
+						cout << weapons.item1 << endl;
+						cout << "Price: " << weapons.price1 << endl;
 					}
 			}
 		}
@@ -861,7 +864,11 @@ if(levelMonster.monsterHealth <= 0){
 		GameMenu();
 	}
 	else if(player.health <= 0){
-		cout << "You died!\n";
+		cout << 
+		"\n\n▒█░░▒█ ▒█▀▀▀█ ▒█░▒█ 　 ▒█▀▀▄ ▀█▀ ▒█▀▀▀ ▒█▀▀▄\n"
+		"▒█▄▄▄█ ▒█░░▒█ ▒█░▒█ 　 ▒█░▒█ ▒█░ ▒█▀▀▀ ▒█░▒█\n"
+		"░░▒█░░ ▒█▄▄▄█ ░▀▄▄▀ 　 ▒█▄▄▀ ▄█▄ ▒█▄▄▄ ▒█▄▄▀\n";
+		sleep(5);
 		GameMenu();
 	}
 
