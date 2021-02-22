@@ -138,6 +138,18 @@ struct WeaponShop{
 	string item9;
 	string item10;
 
+	string equippedItem1;
+	string equippedItem2;
+	string equippedItem3;
+	string equippedItem4;
+	string equippedItem5;
+	string equippedItem6;
+	string equippedItem7;
+	string equippedItem8;
+	string equippedItem9;
+	string equippedItem10;
+
+
 	int price1;
 	int price2;
 	int price3;
@@ -270,7 +282,9 @@ int LvlUp(int XP, int Lvl){
 						cout << "Enter your password: ";
 							cin >> weaponshopChoice;
 							if(weaponshopChoice == password){
-								// Player waepon is that weapon.
+							
+								coins -= weapons.price1;
+								weapons.item1 = weapons.equippedItem1;
 							}
 							if(weaponshopChoice != password){
 								cout << "password invalid!";
@@ -309,7 +323,8 @@ int LvlUp(int XP, int Lvl){
 						cout << "Enter your password: ";
 							cin >> weaponshopChoice;
 							if(weaponshopChoice == password){
-								// Player waepon is that weapon.
+								
+								weapons.item2 = weapons.equippedItem2;
 							}
 							if(weaponshopChoice != password){
 								cout << "password invalid!";
@@ -348,7 +363,9 @@ int LvlUp(int XP, int Lvl){
 						cout << "Enter your password: ";
 							cin >> weaponshopChoice;
 							if(weaponshopChoice == password){
-								// Player waepon is that weapon.
+								
+								coins -= weapons.price2;
+								weapons.item3 = weapons.equippedItem3;
 							}
 							if(weaponshopChoice != password){
 								cout << "password invalid!";
@@ -387,7 +404,8 @@ int LvlUp(int XP, int Lvl){
 						cout << "Enter your password: ";
 							cin >> weaponshopChoice;
 							if(weaponshopChoice == password){
-								// Player waepon is that weapon.
+								coins -= weapons.price4;
+								weapons.item4 = weapons.equippedItem4;
 							}
 							if(weaponshopChoice != password){
 								cout << "password invalid!";
@@ -426,7 +444,8 @@ int LvlUp(int XP, int Lvl){
 						cout << "Enter your password: ";
 							cin >> weaponshopChoice;
 							if(weaponshopChoice == password){
-								// Player waepon is that weapon.
+								coins -= weapons.price5;
+								weapons.item5 = weapons.equippedItem5;
 							}
 							if(weaponshopChoice != password){
 								cout << "password invalid!";
@@ -465,7 +484,8 @@ int LvlUp(int XP, int Lvl){
 						cout << "Enter your password: ";
 							cin >> weaponshopChoice;
 							if(weaponshopChoice == password){
-								// Player waepon is that weapon.
+								coins -= weapons.price1;
+								weapons.item6 = weapons.equippedItem6;
 							}
 							if(weaponshopChoice != password){
 								cout << "password invalid!";
@@ -504,7 +524,8 @@ int LvlUp(int XP, int Lvl){
 						cout << "Enter your password: ";
 							cin >> weaponshopChoice;
 							if(weaponshopChoice == password){
-								// Player waepon is that weapon.
+								coins -= weapons.price6;
+								weapons.item7 = weapons.equippedItem7;
 							}
 							if(weaponshopChoice != password){
 								cout << "password invalid!";
@@ -521,44 +542,7 @@ int LvlUp(int XP, int Lvl){
 						}
 					}
 
-										if(weaponshopChoice == "1"){
-						ClearScreen();
-						cout << weapons.item1 << endl;
-						cout << "Price: " << weapons.price1 << endl;
-						cout << "(a) Confirm" << endl;
-						cout << "(b) cancel" << endl;
-						cin >> weaponshopChoice;
-						if(weaponshopChoice == "b"){
-							ClearScreen();
-							cout << "(1) " << weapons.item1 << endl;
-							cout << "(2) " << weapons.item2 << endl;
-							cout << "(3) " << weapons.item3 << endl;
-							cout << "(4) " << weapons.item4 << endl;
-							cout << "(5) " << weapons.item5 << endl;
-							cout << "(6) " << weapons.item6 << endl;
-							cin >> weaponshopChoice;
-						}
-						if(weaponshopChoice == "a"){
-							ClearScreen();
-						cout << "Enter your password: ";
-							cin >> weaponshopChoice;
-							if(weaponshopChoice == password){
-								// Player waepon is that weapon.
-							}
-							if(weaponshopChoice != password){
-								cout << "password invalid!";
-								sleep(2);
-								ClearScreen();
-											cout << "(1) " << weapons.item1 << endl;
-							cout << "(2) " << weapons.item2 << endl;
-							cout << "(3) " << weapons.item3 << endl;
-							cout << "(4) " << weapons.item4 << endl;
-							cout << "(5) " << weapons.item5 << endl;
-							cout << "(6) " << weapons.item6 << endl;
-							cin >> weaponshopChoice;
-							}
-						}
-					}
+									
 					
 			}
 		}
@@ -779,9 +763,14 @@ if (player.element == "Earth"){
 	playerAttacks.manaAttack4 = 60;
 }
 
+if(weapons.item1 == weapons.equippedItem1){
+
  playerAttacks.attack5 = "Basic slash";
  playerAttacks.attack6 = "Spin slash";
  playerAttacks.attack7="Slicing combo";
+}
+
+
 	playerAttacks.damageAttack1 = 10;
 	playerAttacks.damageAttack2 = 15;
 	playerAttacks.damageAttack3 = 20;
