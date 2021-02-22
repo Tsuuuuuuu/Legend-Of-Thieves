@@ -221,7 +221,7 @@ int LvlUp(int XP, int Lvl){
 
 		void WeaponShop(){
 			int ui = 100;
-			int weaponshopChoice;
+			string weaponshopChoice;
 			weapons.item1 = "Knife";
 			weapons.item2 = "Sword";
 			weapons.item3 = "Claymore";
@@ -248,7 +248,7 @@ int LvlUp(int XP, int Lvl){
 
 				while(ui == 100){
 
-					if(weaponshopChoice == 1){
+					if(weaponshopChoice == "1"){
 						ClearScreen();
 						cout << weapons.item1 << endl;
 						cout << "Price: " << weapons.price1 << endl;
@@ -263,7 +263,7 @@ int LvlUp(int XP, int Lvl){
 							cout << "(4) " << weapons.item4 << endl;
 							cout << "(5) " << weapons.item5 << endl;
 							cout << "(6) " << weapons.item6 << endl;
-							cin >> weaponShopChoice;
+							cin >> weaponshopChoice;
 						}
 						if(weaponshopChoice == "a"){
 							ClearScreen();
@@ -271,6 +271,18 @@ int LvlUp(int XP, int Lvl){
 							cin >> weaponshopChoice;
 							if(weaponshopChoice == password){
 								// Player waepon is that weapon.
+							}
+							if(weaponshopChoice != password){
+								cout << "password invalid!";
+								sleep(2);
+								ClearScreen();
+											cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponshopChoice;
 							}
 						}
 					}
