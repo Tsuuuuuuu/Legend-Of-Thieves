@@ -20,7 +20,8 @@ using namespace std;
 	int Lvl = 0;
 	int LvlCount;
 	int coins;
-	
+	string username;
+	string password;
 
 /*
 Declaring functions
@@ -251,7 +252,29 @@ int LvlUp(int XP, int Lvl){
 						ClearScreen();
 						cout << weapons.item1 << endl;
 						cout << "Price: " << weapons.price1 << endl;
+						cout << "(a) Confirm" << endl;
+						cout << "(b) cancel" << endl;
+						cin >> weaponshopChoice;
+						if(weaponshopChoice == "b"){
+							ClearScreen();
+							cout << "(1) " << weapons.item1 << endl;
+							cout << "(2) " << weapons.item2 << endl;
+							cout << "(3) " << weapons.item3 << endl;
+							cout << "(4) " << weapons.item4 << endl;
+							cout << "(5) " << weapons.item5 << endl;
+							cout << "(6) " << weapons.item6 << endl;
+							cin >> weaponShopChoice;
+						}
+						if(weaponshopChoice == "a"){
+							ClearScreen();
+						cout << "Enter your password: ";
+							cin >> weaponshopChoice;
+							if(weaponshopChoice == password){
+								// Player waepon is that weapon.
+							}
+						}
 					}
+					
 			}
 		}
 
@@ -951,8 +974,7 @@ string ascii =
 void Login()
 {
 	string loginChoice;
-	string username;
-	string password;
+	
 	fstream login;
 	login.open("login.dat", ios::out);
 	cout << 
