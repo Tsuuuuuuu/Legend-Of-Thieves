@@ -1322,7 +1322,6 @@ void Login()
 	cin >> loginChoice;
 
 	if ((loginChoice == "a") || (loginChoice == "A")) {
-
 		GameMenu();
 	}
 }
