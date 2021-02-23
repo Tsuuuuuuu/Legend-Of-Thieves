@@ -776,7 +776,7 @@ if(weapons.item1 == weapons.equippedItem1){
 	playerAttacks.attack7 = "Divine Burst";
 }
 	if(weapons.item3 == weapons.equippedItem3){
-		playerAttacks.attack5 = 	
+		playerAttacks.attack5 = "Heavy Slash";	
 	}
 
 
