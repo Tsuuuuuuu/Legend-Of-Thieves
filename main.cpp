@@ -198,7 +198,7 @@ int LvlUpReq(int XP, int Lvl) {
 }
 
 
-// If player win the Level
+// If player wins the Level
 int LvlWin(int XP) {
 	XP = XP + 100;
 	coins += 100;
@@ -239,8 +239,8 @@ void WeaponShop() {
 	weapons.item3 = "Claymore";
 	weapons.item4 = "Giant Hammer";
 	weapons.item5 = "Dual Swords";
-	weapons.item6 = "Dual Kamas";
-	weapons.item7 = "Chains";
+	weapons.item6 = "Dual Kamas (SOLD OUT)";
+	
 
 	weapons.price1 = 100;
 	weapons.price2 = 300;
@@ -284,7 +284,7 @@ void WeaponShop() {
 				cout << "Enter your password: ";
 				cin >> weaponshopChoice;
 				if (weaponshopChoice == password) {
-
+					
 					coins -= weapons.price1;
 					weapons.item1 = weapons.equippedItem1;
 				}
@@ -327,7 +327,7 @@ void WeaponShop() {
 				cout << "Enter your password: ";
 				cin >> weaponshopChoice;
 				if (weaponshopChoice == password) {
-
+						coins -= weapons.price2;
 					weapons.item2 = weapons.equippedItem2;
 				}
 				if (weaponshopChoice != password) {
@@ -370,7 +370,7 @@ void WeaponShop() {
 				cin >> weaponshopChoice;
 				if (weaponshopChoice == password) {
 
-					coins -= weapons.price2;
+					coins -= weapons.price3;
 					weapons.item3 = weapons.equippedItem3;
 				}
 				if (weaponshopChoice != password) {
@@ -473,7 +473,7 @@ void WeaponShop() {
 			}
 		}
 
-		if (weaponshopChoice == "1") {
+		if (weaponshopChoice == "6") {
 			ClearScreen();
 			cout << weapons.item1 << endl;
 			cout << "Price: " << weapons.price1 << endl;
@@ -497,7 +497,7 @@ void WeaponShop() {
 				cout << "Enter your password: ";
 				cin >> weaponshopChoice;
 				if (weaponshopChoice == password) {
-					coins -= weapons.price1;
+					coins -= weapons.price6;
 					weapons.item6 = weapons.equippedItem6;
 				}
 				if (weaponshopChoice != password) {
@@ -517,49 +517,7 @@ void WeaponShop() {
 			}
 		}
 
-		if (weaponshopChoice == "1") {
-			ClearScreen();
-			cout << weapons.item1 << endl;
-			cout << "Price: " << weapons.price1 << endl;
-			cout << "(a) Confirm" << endl;
-			cout << "(b) cancel" << endl;
-			cin >> weaponshopChoice;
-			if (weaponshopChoice == "b") {
-				ClearScreen();
-				cout << "(1) " << weapons.item1 << endl;
-				cout << "(2) " << weapons.item2 << endl;
-				cout << "(3) " << weapons.item3 << endl;
-				cout << "(4) " << weapons.item4 << endl;
-				cout << "(5) " << weapons.item5 << endl;
-				cout << "(6) " << weapons.item6 << endl;
-				cout << "(7) Back to menu";
-				
-				cin >> weaponshopChoice;
-			}
-			if (weaponshopChoice == "a") {
-				ClearScreen();
-				cout << "Enter your password: ";
-				cin >> weaponshopChoice;
-				if (weaponshopChoice == password) {
-					coins -= weapons.price6;
-					weapons.item7 = weapons.equippedItem7;
-				}
-				if (weaponshopChoice != password) {
-					cout << "password invalid!";
-					sleep(2);
-					ClearScreen();
-					cout << "(1) " << weapons.item1 << endl;
-					cout << "(2) " << weapons.item2 << endl;
-					cout << "(3) " << weapons.item3 << endl;
-					cout << "(4) " << weapons.item4 << endl;
-					cout << "(5) " << weapons.item5 << endl;
-					cout << "(6) " << weapons.item6 << endl;
-				cout << "(7) Back to menu";
-					cout << "(7) Back to menu";
-					cin >> weaponshopChoice;
-				}
-			}
-		}
+
 
 		if(weaponshopChoice == "7"){
 			ClearScreen();
@@ -792,6 +750,12 @@ void LevelStart(int XP, int Lvl) {
 		playerAttacks.attack5 = "Basic slash";
 		playerAttacks.attack6 = "Spin slash";
 		playerAttacks.attack7 = "Slicing combo";
+		
+		// Damages per attack
+		
+		playerAttacks.damageAttack5 = 5;
+		playerAttacks.damageAttack6 = 10;
+		playerAttacks.damageAttack7 = 15;
 	}
 
 	if (weapons.item2 == weapons.equippedItem2) {
