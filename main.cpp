@@ -40,6 +40,7 @@ int AddCoins();
 void ClearScreen();
 void ElementChange();
 void WeaponShop();
+void Codex();
 /* No files, struct instead.
 
 structing monsters and hero and damage
@@ -161,6 +162,20 @@ struct WeaponShop {
 };
 
 
+// Codex
+struct CodexAscii{
+	string ascii1;
+	string ascii2;
+	string ascii3;
+	string ascii4;
+	string ascii5;
+	string ascii6;
+	string ascii7;
+	string ascii8;
+	string ascii9;
+	string ascii10;
+};
+
 
 // Elements
 struct Element {
@@ -225,6 +240,45 @@ struct Monster levelMonster;
 struct PotionShop elemShopChoice;
 struct Element elems;
 struct WeaponShop weapons;
+
+// Ascii global
+struct CodexAscii HeroAscii;
+struct CodexAscii MonsterAscii;
+struct CodexAscii PotionAscii;
+struct CodexAscii WeaponAscii;
+
+/*
+		Codex
+*/
+
+void Codex(){
+	int ui;
+	string CodexChoice;
+	// WIP
+
+	// Display Codex Menu
+	cout << 
+"░█████╗░░█████╗░██████╗░███████╗██╗░░██╗\n"
+"██╔══██╗██╔══██╗██╔══██╗██╔════╝╚██╗██╔╝\n"
+"██║░░╚═╝██║░░██║██║░░██║█████╗░░░╚███╔╝░\n"
+"██║░░██╗██║░░██║██║░░██║██╔══╝░░░██╔██╗░\n"
+"╚█████╔╝╚█████╔╝██████╔╝███████╗██╔╝╚██╗\n"
+"░╚════╝░░╚════╝░╚═════╝░╚══════╝╚═╝░░╚═╝\n\n\n";
+sleep(1.0);
+ClearScreen();
+	cout << "Welcome to the Codex! Here, you can view information on different monsters and items. You can also view tips on how to play the game!\n\n\n\n";
+
+	cout << "(a) Monsters\n\n";
+	cout << "(b) Weapons\n\n";
+	cout << "(c) Potions\n\n";
+	cout << "(d) Elements\n\n";
+	cout << "(e) Tips\n\n";
+	cout << "(f) Back to menu\n\n";
+	cout << " > ";
+	cin >> CodexChoice;
+	
+}
+
 
 
 /*
@@ -745,6 +799,13 @@ void LevelStart(int XP, int Lvl) {
 		playerAttacks.manaAttack4 = 60;
 	}
 
+	playerAttacks.attack5 = "Punch";
+	playerAttacks.attack6 = "Punch Combo";
+	playerAttacks.attack7 = "Heavy Punch Combo";
+			playerAttacks.damageAttack5 = 3;
+		playerAttacks.damageAttack6 = 7;
+		playerAttacks.damageAttack7 = 10;
+
 	if (weapons.item1 == weapons.equippedItem1) {
 		// Knife attacks
 		playerAttacks.attack5 = "Basic slash";
@@ -763,18 +824,27 @@ void LevelStart(int XP, int Lvl) {
 		playerAttacks.attack5 = "Rush Pierce";
 		playerAttacks.attack6 = "Core Slash";
 		playerAttacks.attack7 = "Divine Burst";
+				playerAttacks.damageAttack5 = 10;
+		playerAttacks.damageAttack6 = 15;
+		playerAttacks.damageAttack7 = 25;
 	}
 
 	if (weapons.item3 == weapons.equippedItem3) {
 		playerAttacks.attack5 = "Heavy Slash";
 		playerAttacks.attack6 = "Blade Slam";
 		playerAttacks.attack7 = "Heavy Slam";
+				playerAttacks.damageAttack5 = 10;
+		playerAttacks.damageAttack6 = 20;
+		playerAttacks.damageAttack7 = 35;
 	}
 	if (weapons.item4 == weapons.equippedItem4) {
 		// Hammer attacks
 		playerAttacks.attack5 = "Hammer Bash";
 		playerAttacks.attack6 = "Spinning Hammer";
 		playerAttacks.attack7 = "Slam Barrage";
+				playerAttacks.damageAttack5 = 5;
+		playerAttacks.damageAttack6 = 10;
+		playerAttacks.damageAttack7 = 15;
 	}
 
 	if (weapons.item5 == weapons.equippedItem5) {
@@ -1218,6 +1288,7 @@ void GameMenu() {
 	cout << ascii;
 
 	Lvl = LvlUp(XP, Lvl);
+	cout << username;
 	stats << "\nXP: " << XP << endl;
 	stats << "Level: " << Lvl << endl;
 	cout << "Coins: " << coins << endl;
@@ -1227,6 +1298,8 @@ void GameMenu() {
 	cout << "(b) Potion Shop\n";
 	cout << "(c) Change element\n";
 	cout << "(d) Weapon Shop\n";
+	cout << "(e) Codex(WIP)\n";
+	cout << "(f) Casino(WIP)\n";
 	cin >> gameMenuChoice;
 
 	if (gameMenuChoice == "a") {
@@ -1251,9 +1324,16 @@ void GameMenu() {
 	if (gameMenuChoice == "d")
 	{
 		double sleep(0.5);
+		ClearScreen();
 		WeaponShop();
 
 
+	}
+	if (gameMenuChoice == "e")
+	{
+		double sleep(0.5);
+		ClearScreen();
+		Codex();
 	}
 
 }
