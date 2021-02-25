@@ -29,3 +29,6 @@ UPDATE[4.1.1]
 Weapon shop added.
 Weapon attacks added
 
+UPDATE[4.2.1]
+
+Default melee attacks added.
