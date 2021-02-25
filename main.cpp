@@ -276,6 +276,31 @@ ClearScreen();
 	cout << "(f) Back to menu\n\n";
 	cout << " > ";
 	cin >> CodexChoice;
+
+	if(CodexChoice == "a"){
+		// stuff here
+	}
+
+	if(CodexChoice == "b"){
+		// stuff here
+	}
+
+	if(CodexChoice == "c"){
+		// stuff here
+	}
+
+	if(CodexChoice == "d"){
+		// stuff here
+	}
+
+	if(CodexChoice == "e"){
+		// stuff here
+	}
+
+	if(CodexChoice == "f"){
+		ClearScreen();
+		GameMenu();
+	}
 	
 }
 
