@@ -263,7 +263,7 @@ void Codex(){
 "██║░░╚═╝██║░░██║██║░░██║█████╗░░░╚███╔╝░\n"
 "██║░░██╗██║░░██║██║░░██║██╔══╝░░░██╔██╗░\n"
 "╚█████╔╝╚█████╔╝██████╔╝███████╗██╔╝╚██╗\n"
-"░╚════╝░░╚════╝░╚═════╝░╚══════╝╚═╝░░╚═╝\n\n\n";
+"░╚════╝░░╚════╝░╚═════╝░╚══════╝╚═╝░░╚═╝\n\n\n\n";
 sleep(1.0);
 ClearScreen();
 	cout << "Welcome to the Codex! Here, you can view information on different monsters and items. You can also view tips on how to play the game!\n\n\n\n";
@@ -276,6 +276,31 @@ ClearScreen();
 	cout << "(f) Back to menu\n\n";
 	cout << " > ";
 	cin >> CodexChoice;
+
+	if(CodexChoice == "a"){
+		// stuff here
+	}
+
+	if(CodexChoice == "b"){
+		// stuff here
+	}
+
+	if(CodexChoice == "c"){
+		// stuff here
+	}
+
+	if(CodexChoice == "d"){
+		// stuff here
+	}
+
+	if(CodexChoice == "e"){
+		// stuff here
+	}
+
+	if(CodexChoice == "f"){
+		ClearScreen();
+		GameMenu();
+	}
 	
 }
 
