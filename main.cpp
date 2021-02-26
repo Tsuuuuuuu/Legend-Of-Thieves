@@ -246,13 +246,23 @@ struct CodexAscii HeroAscii;
 struct CodexAscii MonsterAscii;
 struct CodexAscii PotionAscii;
 struct CodexAscii WeaponAscii;
+/*
+Zeksus
+Resinex
+Caludor
+WHisp
+Tephus
+Tekkus
+Defus
+Zekkor
+*/
 
 /*
 		Codex
 */
 
 void Codex(){
-	int ui;
+	int ui = 100;
 	string CodexChoice;
 	// WIP
 
@@ -276,7 +286,87 @@ ClearScreen();
 	cout << "(f) Back to menu\n\n";
 	cout << " > ";
 	cin >> CodexChoice;
+	while(ui == 100){
+
+	if(CodexChoice == "a"){
+		cout << "(a) View information\n";
+		cout << "(b) Display\n";
+		cout << "(c) Back\n";
+		cin >> CodexChoice;
+
+	if(CodexChoice == "a"){
+		// Show monsters
+		// Monster names
+		cout << "(a) Phynxis\n";
+		cout << "(b) Majux\n";
+		cout << "(c) Zeksus\n";
+		cout << "(d) Resinex\n";
+		cout << "(e) Caludor\n";
+		cout << "(f) Whisp\n";
+		cout << "(g) Tephus\n";
+		cout << "(h) Tekkus\n";
+		cout << "(i) Defus\n";
+		cout << "(j) Zekkor\n";
+		cout << "(1) Back\n";
+		cin >> CodexChoice;
+		if(CodexChoice == "1"){
+			ClearScreen();
+				cout << "(a) Monsters\n\n";
+	cout << "(b) Weapons\n\n";
+	cout << "(c) Potions\n\n";
+	cout << "(d) Elements\n\n";
+	cout << "(e) Tips\n\n";
+	cout << "(f) Back to menu\n\n";
+	cout << " > ";
+		}
+	}
+
+
+
+	if(CodexChoice == "b"){
+		// Show monsters
+		// Monster names
+	}
+
+	if(CodexChoice == "c"){
+		ClearScreen();
+			cout << "(a) Monsters\n\n";
+	cout << "(b) Weapons\n\n";
+	cout << "(c) Potions\n\n";
+	cout << "(d) Elements\n\n";
+	cout << "(e) Tips\n\n";
+	cout << "(f) Back to menu\n\n";
+	cout << " > ";
+	}
+
+
+	}
+
+
+
+
+	if(CodexChoice == "b"){
+		// stuff here
+	}
+
+	if(CodexChoice == "c"){
+		// stuff here
+	}
+
+	if(CodexChoice == "d"){
+		// stuff here
+	}
+
+	if(CodexChoice == "e"){
+		// stuff here
+	}
+
+	if(CodexChoice == "f"){
+		ClearScreen();
+		GameMenu();
+	}
 	
+	}
 }
 
 
@@ -286,8 +376,17 @@ ClearScreen();
 */
 
 void WeaponShop() {
+
+
 	int ui = 100;
 	string weaponshopChoice;
+	cout << 
+"░██╗░░░░░░░██╗███████╗░█████╗░██████╗░░█████╗░███╗░░██╗░██████╗\n"
+"░██║░░██╗░░██║██╔════╝██╔══██╗██╔══██╗██╔══██╗████╗░██║██╔════╝\n"
+"░╚██╗████╗██╔╝█████╗░░███████║██████╔╝██║░░██║██╔██╗██║╚█████╗░\n"
+"░░████╔═████║░██╔══╝░░██╔══██║██╔═══╝░██║░░██║██║╚████║░╚═══██╗\n"
+"░░╚██╔╝░╚██╔╝░███████╗██║░░██║██║░░░░░╚█████╔╝██║░╚███║██████╔╝\n"
+"░░░╚═╝░░░╚═╝░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░░╚════╝░╚═╝░░╚══╝╚═════╝░\n\n\n";
 	weapons.item1 = "Knife";
 	weapons.item2 = "Sword";
 	weapons.item3 = "Claymore";
@@ -487,7 +586,7 @@ void WeaponShop() {
 
 		if (weaponshopChoice == "5") {
 			ClearScreen();
-			cout << weapons.item1 << endl;
+			cout << weapons.item5 << endl;
 			cout << "Price: " << weapons.price5 << endl;
 			cout << "(a) Confirm" << endl;
 			cout << "(b) cancel" << endl;
@@ -529,8 +628,8 @@ void WeaponShop() {
 
 		if (weaponshopChoice == "6") {
 			ClearScreen();
-			cout << weapons.item1 << endl;
-			cout << "Price: " << weapons.price1 << endl;
+			cout << weapons.item6 << endl;
+			cout << "Price: " << weapons.price6 << endl;
 			cout << "(a) Confirm" << endl;
 			cout << "(b) cancel" << endl;
 			cin >> weaponshopChoice;
@@ -1183,10 +1282,10 @@ void LevelStart(int XP, int Lvl) {
 				player.mana += 200;
 				PwrUpCnt -= 1;
 
-				playerAttacks.attack1 = "Fire Punches";
-				playerAttacks.attack2 = "Fire Walker";
-				playerAttacks.attack3 = "Fire collumn";
-				playerAttacks.attack4 = "Fire Beam";
+				playerAttacks.attack1 = "Cosmic Slam";
+				playerAttacks.attack2 = "Cosmic Spiral";
+				playerAttacks.attack3 = "Cosmic Beam";
+				playerAttacks.attack4 = "Cosmic Burst";
 				playerAttacks.attack5 = "Heavy Forearm Slash";
 				playerAttacks.attack6 = "Air Slash";
 				playerAttacks.attack7 = "Cosmic stab barrage";
@@ -1288,7 +1387,7 @@ void GameMenu() {
 	cout << ascii;
 
 	Lvl = LvlUp(XP, Lvl);
-	cout << username;
+	cout << username << endl;
 	stats << "\nXP: " << XP << endl;
 	stats << "Level: " << Lvl << endl;
 	cout << "Coins: " << coins << endl;
@@ -1317,6 +1416,7 @@ void GameMenu() {
 	{
 
 		double sleep(0.5);
+		ClearScreen();
 		ElementChange();
 
 	}
