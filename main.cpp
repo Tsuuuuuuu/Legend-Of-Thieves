@@ -1564,7 +1564,7 @@ void GameMenu() {
 	cout << "(c) Change element\n";
 	cout << "(d) Weapon Shop\n";
 	cout << "(e) Codex(WIP)\n";
-	cout << "(f) Casino(WIP)\n";
+	cout << "(f) Casino(NEW!)\n";
 	cout << "(g) Credits\n";
 	cout << " > ";
 	cin >> gameMenuChoice;
