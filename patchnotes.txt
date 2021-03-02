@@ -21,14 +21,11 @@ This bug is soon to be fixed, when it is, you will be notified in the afternoon 
 UPDATE[3.1.4]
 
 Element changing option added to game menu along with spacing fix in weapon Shop
-Coin bug fixed.
-Weapons added along with mana fix.
+Coin bug fixed
+Weapons added along with mana fix
 
-UPDATE[4.1.1]
+UPDATE[4.0.1]
 
-Weapon shop added.
-Weapon attacks added
+Casino added. You can use the casino to bet money. If you lose, you lose the amount of money that you bet. You can set a deposit amount (a maximum amount of coins you are going to use) so you dont go overboard (unless you want to).
 
-UPDATE[4.2.1]
-
-Default melee attacks added.
+Coins obtained after winning a level fixed
