@@ -1,7 +1,7 @@
 /*
 Skyy Civil
 */
-//   LEGEND \\
+//   LEGEND   \\
 
 #include <iostream>
 #include <cstdlib>
@@ -22,6 +22,7 @@ int LvlCount;
 int coins;
 string username;
 string password;
+	int playerAttack;
 
 /*
 Declaring functions
@@ -29,6 +30,7 @@ Declaring functions
 int main();
 void Menu();
 void Login();
+void Credits();
 void LevelStart();
 void GameMenu();
 void LvlUp();
@@ -41,6 +43,11 @@ void ClearScreen();
 void ElementChange();
 void WeaponShop();
 void Codex();
+void drawLine(int n, char symbol);
+void rules();
+int Casino();
+int CoinDrop();
+void Upgrades();
 /* No files, struct instead.
 
 structing monsters and hero and damage
@@ -212,12 +219,20 @@ int LvlUpReq(int XP, int Lvl) {
 	return (LvlUpReq);
 }
 
+// Coin drops
+
+int CoinDrop(){
+coins += 100;
+return coins;
+}
+
 
 // If player wins the Level
-int LvlWin(int XP) {
-	XP = XP + 100;
-	coins += 100;
-	return (XP);
+int LvlWin() {
+	XP += 100;
+	
+	return XP;
+	
 }
 
 // Level up
@@ -248,11 +263,175 @@ struct CodexAscii PotionAscii;
 struct CodexAscii WeaponAscii;
 
 /*
+	Casino
+*/
+
+
+void Upgrades(){
+	// Upgrades tab soon
+
+	string upgradeChoice;
+	cout << 
+"██╗░░░██╗██████╗░░██████╗░██████╗░░█████╗░██████╗░███████╗░██████╗\n"
+"██║░░░██║██╔══██╗██╔════╝░██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝\n"
+"██║░░░██║██████╔╝██║░░██╗░██████╔╝███████║██║░░██║█████╗░░╚█████╗░\n"
+"██║░░░██║██╔═══╝░██║░░╚██╗██╔══██╗██╔══██║██║░░██║██╔══╝░░░╚═══██╗\n"
+"╚██████╔╝██║░░░░░╚██████╔╝██║░░██║██║░░██║██████╔╝███████╗██████╔╝\n"
+"░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝╚═════╝░╚══════╝╚═════╝░\n\n\n";
+
+	cout << "\n(a) Weapon upgrades\n\n";
+	cout << "\n(b) Magic Upgrades\n\n";
+
+	cin >> upgradeChoice;
+
+	// if statements
+
+	if(upgradeChoice == "a"){
+			cout << "Upgrade this weapon: ";
+	}
+
+	if(upgradeChoice == "b"){
+
+	}
+	
+
+}
+
+
+int Casino()
+{
+	int ui = 100;
+    
+    int amount; // hold player's balance amount
+    int bettingAmount; 
+    int guess;
+    int dice; // hold computer generated number
+    char choice;
+ 
+    srand(time(0)); // "Seed" the random generator
+
+    drawLine(60,'_');
+    cout << "\n\n\n\t\t"
+"░█████╗░░█████╗░░██████╗██╗███╗░░██╗░█████╗░\n"
+"██╔══██╗██╔══██╗██╔════╝██║████╗░██║██╔══██╗\n"
+"██║░░╚═╝███████║╚█████╗░██║██╔██╗██║██║░░██║\n"
+"██║░░██╗██╔══██║░╚═══██╗██║██║╚████║██║░░██║\n"
+"╚█████╔╝██║░░██║██████╔╝██║██║░╚███║╚█████╔╝\n"
+"░╚════╝░╚═╝░░╚═╝╚═════╝░╚═╝╚═╝░░╚══╝░╚════╝░\n\n\n\n";
+    drawLine(60,'_');
+ 
+
+ 
+    cout << "\n\nEnter Deposit amount to play : $";
+    cin >> amount;
+		while(ui == 100){
+			if(amount > coins){
+				cout << "Not enugh coins, try again: ";
+				cin >> amount;
+			}
+    
+    do
+    { // This is a Do While loop (I hate these so much)
+        system("cls"); // Just a basic system file declaration
+        rules(); // Allows you to have the option to display the rules
+        cout << "\n\nYour current balance is " << amount << "\n"; // Shows player's coin balance
+		
+		// Get player's betting amount
+        do
+        {
+            cout <<username <<", enter money to bet : $";
+            cin >> bettingAmount;
+            if(bettingAmount > amount)
+                cout << "Your betting amount is more than your current balance\n"
+                       <<"\nRe-enter data\n ";
+        }while(bettingAmount > amount);
+ 
+		// Get player's numbers
+        do
+        {
+            cout << "Guess your number to bet between 1 to 10 :";
+            cin >> guess;
+            if(guess <= 0 || guess > 10)
+                cout << "Please check the number!! should be between 1 to 10\n"
+                    <<"\nRe-enter data\n ";
+        }while(guess <= 0 || guess > 10);
+ 
+        dice = rand()%10 + 1;
+    
+        if(dice == guess)
+        {
+            cout << "\n\nGood Luck!! You won $" << bettingAmount * 10;
+            amount = amount + bettingAmount * 10;
+						coins += bettingAmount;
+        }
+        else
+        {
+            cout << "Bad Luck this time !! You lost $ "<< bettingAmount <<"\n";
+            amount = amount - bettingAmount;
+						coins -= bettingAmount;
+        }
+ 
+        cout << "\nThe winning number was : " << dice <<"\n";
+        cout << "\n"<< username <<", You have $ " << amount << "\n";
+        if(amount == 0)
+        {
+            cout << "You have no money to play ";
+            break;
+        }
+        cout << "\n\n-->Do you want to play again (y/n)? ";		
+        cin >> choice;
+    }while(choice =='Y'|| choice=='y');
+    
+    cout << "\n\n\n";
+    drawLine(70,'=');
+    cout << "\n\nThanks for playing game. Your balance amount is $ " << amount << "\n\n";
+    drawLine(70,'=');
+		}
+    return 0;
+		
+}
+ 
+void drawLine(int n, char symbol)
+{
+    for(int i=0; i<n; i++)
+        cout << symbol;
+    cout << "\n" ;
+}
+ 
+void rules()
+{
+    system("cls");
+    cout << "\n\n";
+    drawLine(80,'-');
+    cout << "\t\tRULES OF THE GAME\n";
+    drawLine(80,'-');
+    cout << "\t1. Choose any number between 1 to 10\n";
+    cout << "\t2. If you win you will get 10 times of money you bet\n";
+    cout << "\t3. If you bet on wrong number you will lose your betting amount\n\n";
+    drawLine(80,'-');
+}
+
+
+
+
+
+/*
+Zeksus
+Resinex
+Caludor
+WHisp
+Tephus
+Tekkus
+Defus
+Zekkor
+*/
+
+/*
 		Codex
 */
 
 void Codex(){
-	int ui;
+	int ui = 100;
 	string CodexChoice;
 	// WIP
 
@@ -276,7 +455,147 @@ ClearScreen();
 	cout << "(f) Back to menu\n\n";
 	cout << " > ";
 	cin >> CodexChoice;
+	while(ui == 100){
+// If the player picks A on the main menu
+	if(CodexChoice == "a"){
+		ClearScreen();
+		cout << "(a) View information\n";
+		cout << "(b) Display\n";
+		cout << "(c) Back\n";
+		cin >> CodexChoice;
+
+	if(CodexChoice == "a"){
+		ClearScreen();
+		// Show monsters
+		// Monster names
+		cout << "(a) Phynxis\n";
+		cout << "(b) Majux\n";
+		cout << "(c) Zeksus\n";
+		cout << "(d) Resinex\n";
+		cout << "(e) Caludor\n";
+		cout << "(f) Whisp\n";
+		cout << "(g) Tephus\n";
+		cout << "(h) Tekkus\n";
+		cout << "(i) Defus\n";
+		cout << "(j) Zekkor\n";
+		cout << "(1) Back\n";
+		cin >> CodexChoice;
+
+
+		if(CodexChoice == "b"){
+			ClearScreen();
+			cout << "Pick a monster to display(WIP)";
+					cout << "(a) Phynxis\n";
+		cout << "(b) Majux\n";
+		cout << "(c) Zeksus\n";
+		cout << "(d) Resinex\n";
+		cout << "(e) Caludor\n";
+		cout << "(f) Whisp\n";
+		cout << "(g) Tephus\n";
+		cout << "(h) Tekkus\n";
+		cout << "(i) Defus\n";
+		cout << "(j) Zekkor\n";
+			cout << "(1) Back\n";
+			cin >> CodexChoice;
+
+
+
+						if(CodexChoice == "1"){
+		cout << "(a) Monsters\n\n";
+		cout << "(b) Weapons\n\n";
+		cout << "(c) Potions\n\n";
+		cout << "(d) Elements\n\n";
+		cout << "(e) Tips\n\n";
+		cout << "(f) Back to menu\n\n";
+		cout << " > ";
+			cin >> CodexChoice;
+			}
+
+		}
+		if(CodexChoice == "1"){
+			ClearScreen();
+				cout << "(a) Monsters\n\n";
+	cout << "(b) Weapons\n\n";
+	cout << "(c) Potions\n\n";
+	cout << "(d) Elements\n\n";
+	cout << "(e) Tips\n\n";
+	cout << "(f) Back to menu\n\n";
+	cout << " > ";
+		}
+	}
+
+
+
+	if(CodexChoice == "b"){
+		// Show monsters
+		// Monster names
+	}
+
+	if(CodexChoice == "c"){
+		ClearScreen();
+			cout << "(a) Monsters\n\n";
+	cout << "(b) Weapons\n\n";
+	cout << "(c) Potions\n\n";
+	cout << "(d) Elements\n\n";
+	cout << "(e) Tips\n\n";
+	cout << "(f) Back to menu\n\n";
+	cout << " > ";
+	}
+
+
+	}
+
+
+
+
+	if(CodexChoice == "b"){
+		
+
+				ClearScreen();
+		cout << "(a) View information\n";
+		cout << "(b) Display\n";
+		cout << "(c) Back\n";
+
+		if(CodexChoice == "a"){
+			ClearScreen();
+			// Info here
+		}
+		if(CodexChoice == "b"){
+			ClearScreen();
+			// Show art for the item
+		}
+
+		if(CodexChoice == "c"){
+					ClearScreen();
+			cout << "(a) Monsters\n\n";
+	cout << "(b) Weapons\n\n";
+	cout << "(c) Potions\n\n";
+	cout << "(d) Elements\n\n";
+	cout << "(e) Tips\n\n";
+	cout << "(f) Back to menu\n\n";
+	cout << " > ";
+		}
+
+	}
+
+	if(CodexChoice == "c"){
+		// stuff here
+	}
+
+	if(CodexChoice == "d"){
+		// stuff here
+	}
+
+	if(CodexChoice == "e"){
+		// stuff here
+	}
+
+	if(CodexChoice == "f"){
+		ClearScreen();
+		GameMenu();
+	}
 	
+	}
 }
 
 
@@ -286,14 +605,23 @@ ClearScreen();
 */
 
 void WeaponShop() {
+
+
 	int ui = 100;
 	string weaponshopChoice;
+	cout << 
+"░██╗░░░░░░░██╗███████╗░█████╗░██████╗░░█████╗░███╗░░██╗░██████╗\n"
+"░██║░░██╗░░██║██╔════╝██╔══██╗██╔══██╗██╔══██╗████╗░██║██╔════╝\n"
+"░╚██╗████╗██╔╝█████╗░░███████║██████╔╝██║░░██║██╔██╗██║╚█████╗░\n"
+"░░████╔═████║░██╔══╝░░██╔══██║██╔═══╝░██║░░██║██║╚████║░╚═══██╗\n"
+"░░╚██╔╝░╚██╔╝░███████╗██║░░██║██║░░░░░╚█████╔╝██║░╚███║██████╔╝\n"
+"░░░╚═╝░░░╚═╝░░╚══════╝╚═╝░░╚═╝╚═╝░░░░░░╚════╝░╚═╝░░╚══╝╚═════╝░\n\n\n";
 	weapons.item1 = "Knife";
 	weapons.item2 = "Sword";
 	weapons.item3 = "Claymore";
 	weapons.item4 = "Giant Hammer";
 	weapons.item5 = "Dual Swords";
-	weapons.item6 = "Dual Kamas (SOLD OUT)";
+	weapons.item6 = "Dual Kamas";
 	
 
 	weapons.price1 = 100;
@@ -487,7 +815,7 @@ void WeaponShop() {
 
 		if (weaponshopChoice == "5") {
 			ClearScreen();
-			cout << weapons.item1 << endl;
+			cout << weapons.item5 << endl;
 			cout << "Price: " << weapons.price5 << endl;
 			cout << "(a) Confirm" << endl;
 			cout << "(b) cancel" << endl;
@@ -529,8 +857,8 @@ void WeaponShop() {
 
 		if (weaponshopChoice == "6") {
 			ClearScreen();
-			cout << weapons.item1 << endl;
-			cout << "Price: " << weapons.price1 << endl;
+			cout << weapons.item6 << endl;
+			cout << "Price: " << weapons.price6 << endl;
 			cout << "(a) Confirm" << endl;
 			cout << "(b) cancel" << endl;
 			cin >> weaponshopChoice;
@@ -708,7 +1036,7 @@ void PotionShop(int coins) {
 
 void LevelStart(int XP, int Lvl) {
 
-	int playerAttack;
+
 
 	int PwrUpCnt = 1;
 
@@ -763,9 +1091,9 @@ void LevelStart(int XP, int Lvl) {
 
 	if (player.element == "Darkness") {
 		playerAttacks.attack1 = "Beam of Darkness";
-		playerAttacks.attack2 = "Shadow Claw"; // Epic
+		playerAttacks.attack2 = "Shadow Claw"; 
 		playerAttacks.attack3 = "Black Hole";
-		playerAttacks.attack4 = "Umbra Boom"; // Nice
+		playerAttacks.attack4 = "Umbra Boom"; 
 
 		playerAttacks.damageAttack1 = 20;
 		playerAttacks.damageAttack2 = 35;
@@ -806,6 +1134,10 @@ void LevelStart(int XP, int Lvl) {
 		playerAttacks.damageAttack6 = 7;
 		playerAttacks.damageAttack7 = 10;
 
+		playerAttacks.manaAttack1 = 0;
+		playerAttacks.manaAttack2 = 0;
+		playerAttacks.manaAttack3 = 0;
+		playerAttacks.manaAttack4 = 0;
 	if (weapons.item1 == weapons.equippedItem1) {
 		// Knife attacks
 		playerAttacks.attack5 = "Basic slash";
@@ -827,8 +1159,12 @@ void LevelStart(int XP, int Lvl) {
 				playerAttacks.damageAttack5 = 10;
 		playerAttacks.damageAttack6 = 15;
 		playerAttacks.damageAttack7 = 25;
-	}
 
+		playerAttacks.manaAttack5 = 0;
+		playerAttacks.manaAttack6 = 0;
+		playerAttacks.manaAttack7 = 0;
+	}
+ 
 	if (weapons.item3 == weapons.equippedItem3) {
 		playerAttacks.attack5 = "Heavy Slash";
 		playerAttacks.attack6 = "Blade Slam";
@@ -836,37 +1172,59 @@ void LevelStart(int XP, int Lvl) {
 				playerAttacks.damageAttack5 = 10;
 		playerAttacks.damageAttack6 = 20;
 		playerAttacks.damageAttack7 = 35;
+		playerAttacks.manaAttack5 = 0;
+		playerAttacks.manaAttack6 = 0;
+		playerAttacks.manaAttack7 = 0;
 	}
 	if (weapons.item4 == weapons.equippedItem4) {
 		// Hammer attacks
 		playerAttacks.attack5 = "Hammer Bash";
 		playerAttacks.attack6 = "Spinning Hammer";
 		playerAttacks.attack7 = "Slam Barrage";
+
 				playerAttacks.damageAttack5 = 5;
 		playerAttacks.damageAttack6 = 10;
 		playerAttacks.damageAttack7 = 15;
+
+			playerAttacks.manaAttack5 = 0;
+		playerAttacks.manaAttack6 = 0;
+		playerAttacks.manaAttack7 = 0;
 	}
 
 	if (weapons.item5 == weapons.equippedItem5) {
+		// Dual swords attacks
 		playerAttacks.attack5 = "Dual Sword Slash";
 		playerAttacks.attack6 = "Dual Sword Spin";
 		playerAttacks.attack7 = "Blazing Barrage";
+
+playerAttacks.damageAttack5 = 15;
+		playerAttacks.damageAttack6 = 20;
+		playerAttacks.damageAttack7 = 35;
+	
+		playerAttacks.manaAttack5 = 0;
+		playerAttacks.manaAttack6 = 0;
+		playerAttacks.manaAttack7 = 0;
 	}
 	
 
+	if (weapons.item6 == weapons.equippedItem6){
+		// Dual Kamas attacks
 
-	playerAttacks.damageAttack1 = 10;
-	playerAttacks.damageAttack2 = 15;
-	playerAttacks.damageAttack3 = 20;
-	playerAttacks.damageAttack4 = 40;
-	playerAttacks.damageAttack5 = 5;
-	playerAttacks.damageAttack6 = 10;
-	playerAttacks.damageAttack7 = 15;
-	// Mana
+		playerAttacks.attack5 = "Pull Slam";
+		playerAttacks.attack6 = "Meteor Barrage";
+		playerAttacks.attack7 = "Rapid Pull Slams";
 
-	playerAttacks.manaAttack5 = 0;
-	playerAttacks.manaAttack6 = 0;
-	playerAttacks.manaAttack7 = 0;
+	playerAttacks.damageAttack5 = 10;
+	playerAttacks.damageAttack6 = 20;
+	playerAttacks.damageAttack7 = 30;
+
+			playerAttacks.manaAttack5 = 0;
+		playerAttacks.manaAttack6 = 0;
+		playerAttacks.manaAttack7 = 0;
+	}
+
+
+
 	// Monster attacks and stats
 
 	levelMonster.monsterCount = 1;
@@ -880,10 +1238,10 @@ void LevelStart(int XP, int Lvl) {
 
 
 	// -----------------MAKING ATTACKS---------------------\\
-		cout << "HP: " << player.health << endl;
-	cout << "Monsters: " << levelMonster.monsterCount;
-	cout << "Monster HP: " << levelMonster.monsterHealth;
-	cout << "\n\n Monster type: " << levelMonster.monsterType;
+		cout << "\nHP: " << player.health << endl;
+	cout << "Monsters: " << levelMonster.monsterCount << endl;
+	cout << "Monster HP: " << levelMonster.monsterHealth << endl;
+	cout << "\n\n Monster type: " << levelMonster.monsterType << endl;
 	cout << "\n\n\nMAGIC ATTACKS\n";
 	cout << "\n\n (1) " << playerAttacks.attack1 << " DMG-" << playerAttacks.damageAttack1 << "     Mana-" << playerAttacks.manaAttack1;
 	cout << "\n\n (2) " << playerAttacks.attack2 << " DMG-" << playerAttacks.damageAttack2 << "     Mana-" << playerAttacks.manaAttack2;
@@ -907,7 +1265,7 @@ void LevelStart(int XP, int Lvl) {
 			int RandAtk = rand() % 3;
 			int RandDmg = rand() % 3;
 			player.mana -= playerAttacks.manaAttack1;
-			cout << endl << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
+			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			player.health = player.health - monsterAttackDamage[RandDmg];
 
 			cout << "\nHP: " << player.health << endl;
@@ -939,7 +1297,7 @@ void LevelStart(int XP, int Lvl) {
 			int RandAtk = rand() % 3;
 			int RandDmg = rand() % 3;
 			player.mana -= playerAttacks.manaAttack2;
-			cout << endl << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
+			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack2;
 			cout << "HP: " << player.health << endl;
 			cout << "\nMana: " << player.mana << endl;
@@ -969,7 +1327,7 @@ void LevelStart(int XP, int Lvl) {
 			int RandAtk = rand() % 3;
 			int RandDmg = rand() % 3;
 			player.mana -= playerAttacks.manaAttack3;
-			cout << endl << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
+			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack3;
 			cout << "\nHP: " << player.health << endl;
 			cout << "\nMana: " << player.mana << endl;
@@ -1001,7 +1359,7 @@ void LevelStart(int XP, int Lvl) {
 			player.mana -= playerAttacks.manaAttack4;
 			player.health -= monsterAttackDamage[RandDmg];
 			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack4;
-			cout << endl << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
+			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			cout << "HP: " << player.health << endl;
 			cout << "\nMana: " << player.mana << endl;
 			cout << "Monsters: " << levelMonster.monsterCount << endl;
@@ -1024,21 +1382,23 @@ void LevelStart(int XP, int Lvl) {
 		}
 
 		// Attack 5 loop
-		if (playerAttack == 5) {
-			ClearScreen();
+		if (playerAttack == 5) { // An If statement
+			ClearScreen(); // clears the screen using the ClearScreen function up at line 194? i think, somewhere around there
 			// Random monster attacks
-			int RandAtk = rand() % 3;
-			int RandDmg = rand() % 3;
-			player.mana -= playerAttacks.manaAttack5;
-			player.mana += 9;
-			player.health = player.health - monsterAttackDamage[RandDmg];
-			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack5;
-			cout << endl << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
-			cout << "HP: " << player.health << endl;
-			cout << "\nMana: " << player.mana << endl;
-			cout << "Monsters: " << levelMonster.monsterCount << endl;
-			cout << "Monster health: " << levelMonster.monsterHealth;
-			cout << "\n\n Monster type: " << levelMonster.monsterType;
+			int RandAtk = rand() % 3; // randomizes monsters attack
+			int RandDmg = rand() % 3; // randomizes monsters attack damage
+			player.mana -= playerAttacks.manaAttack5; // player mana is depleted by the amoun of mana it COSTS to use the previous attack (attack 5)
+			player.mana += 9; // Player mana goes up by 9 (because this is a melee attack)
+			player.health = player.health - monsterAttackDamage[RandDmg]; // Player health is depleted from monsters attack
+			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack5; // monster health is depleted by player's attack
+			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl; // Shows what attack the monster used and how much damage it dealt (randoms are complicated so I wont teach you that yet)
+			cout << "HP: " << player.health << endl; // Shows player HP
+			cout << "\nMana: " << player.mana << endl; // Shows player Mana (energy)
+			cout << "Monsters: " << levelMonster.monsterCount << endl; // Shows how many monsters are left
+			cout << "Monster health: " << levelMonster.monsterHealth; // Shows monster health
+			cout << "\n\n Monster type: " << levelMonster.monsterType; // Monster type
+
+			// All the stuff below is just showing the attacks you can use
 			cout << "\n\n\nMAGIC ATTACKS\n";
 			cout << "\n\n (1) " << playerAttacks.attack1 << " DMG-" << playerAttacks.damageAttack1 << "     Mana-" << playerAttacks.manaAttack1;
 			cout << "\n\n (2) " << playerAttacks.attack2 << " DMG-" << playerAttacks.damageAttack2 << "     Mana-" << playerAttacks.manaAttack2;
@@ -1095,7 +1455,7 @@ void LevelStart(int XP, int Lvl) {
 			int RandAtk = rand() % 3;
 			int RandDmg = rand() % 3;
 			player.mana -= playerAttacks.manaAttack7;
-			cout << endl << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
+			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			player.health = player.health - monsterAttackDamage[RandDmg];
 
 			cout << "\nHP: " << player.health << endl;
@@ -1183,10 +1543,10 @@ void LevelStart(int XP, int Lvl) {
 				player.mana += 200;
 				PwrUpCnt -= 1;
 
-				playerAttacks.attack1 = "Fire Punches";
-				playerAttacks.attack2 = "Fire Walker";
-				playerAttacks.attack3 = "Fire collumn";
-				playerAttacks.attack4 = "Fire Beam";
+				playerAttacks.attack1 = "Cosmic Slam";
+				playerAttacks.attack2 = "Cosmic Spiral";
+				playerAttacks.attack3 = "Cosmic Beam";
+				playerAttacks.attack4 = "Cosmic Burst";
 				playerAttacks.attack5 = "Heavy Forearm Slash";
 				playerAttacks.attack6 = "Air Slash";
 				playerAttacks.attack7 = "Cosmic stab barrage";
@@ -1217,9 +1577,9 @@ void LevelStart(int XP, int Lvl) {
 			}
 			if (playerAttack == 5) {
 				ClearScreen();
-				cout << "\nHP: " << player.health;
-				cout << "Monsters: " << levelMonster.monsterCount;
-				cout << "Monster HP: " << levelMonster.monsterHealth;
+				cout << "\nHP: " << player.health << endl;
+				cout << "Monsters: " << levelMonster.monsterCount << endl;
+				cout << "Monster HP: " << levelMonster.monsterHealth << endl;
 				cout << "\n\n Monster type: " << levelMonster.monsterType;
 				cout << "\n\n\nMAGIC ATTACKS\n";
 				cout << "\n\n (1) " << playerAttacks.attack1 << " DMG-" << playerAttacks.damageAttack1 << "     Mana-" << playerAttacks.manaAttack1;
@@ -1239,8 +1599,13 @@ void LevelStart(int XP, int Lvl) {
 
 		// When player wins
 		if (levelMonster.monsterHealth <= 0) {
+			
 			ClearScreen();
-			XP = LvlWin(XP);
+			cout << "You win!\n";
+			sleep(3);
+			ClearScreen();
+			XP = LvlWin();
+			coins = CoinDrop();
 
 			GameMenu();
 		}
@@ -1288,7 +1653,7 @@ void GameMenu() {
 	cout << ascii;
 
 	Lvl = LvlUp(XP, Lvl);
-	cout << username;
+	cout << username << endl;
 	stats << "\nXP: " << XP << endl;
 	stats << "Level: " << Lvl << endl;
 	cout << "Coins: " << coins << endl;
@@ -1299,10 +1664,14 @@ void GameMenu() {
 	cout << "(c) Change element\n";
 	cout << "(d) Weapon Shop\n";
 	cout << "(e) Codex(WIP)\n";
-	cout << "(f) Casino(WIP)\n";
+	cout << "(f) Casino(NEW!)\n";
+	cout << "(g) Upgrades(WIP)\n";
+	cout << "(h) Credits\n";
+	cout << " > ";
 	cin >> gameMenuChoice;
 
 	if (gameMenuChoice == "a") {
+		
 		ClearScreen();
 		LevelStart(XP, Lvl);
 	}
@@ -1317,6 +1686,7 @@ void GameMenu() {
 	{
 
 		double sleep(0.5);
+		ClearScreen();
 		ElementChange();
 
 	}
@@ -1334,6 +1704,24 @@ void GameMenu() {
 		double sleep(0.5);
 		ClearScreen();
 		Codex();
+	}
+
+	if(gameMenuChoice == "f"){
+		double sleep(0.5);
+		ClearScreen();
+		Casino();
+	}
+
+	if(gameMenuChoice == "g"){
+		double sleep(0.5);
+		ClearScreen();
+		Upgrades();
+	}
+
+	if(gameMenuChoice == "h"){
+		double sleep(0.5);
+		ClearScreen();
+		Credits();
 	}
 
 }
@@ -1389,8 +1777,8 @@ void StoryMode(void)
 void Credits() {
 
 	int creditsChoice;
-	cout << "\n\n\n\n\nExecutive Creator: Skyy Civil he is a furry\n\n";
-	cout << "\n\n\n\n\nCreator: Evan Handshuh\n\n"; // Stop changing these no
+	cout << "\n\n\n\n\nCreator: Skyy Civil\n\n";
+	cout << "\nContent Creator: Evan \n\n"; 
 	cout << "(1) 	Back to menu\n";
 	cout << "(2) 	Continue to story mode\n";
 	cin >> creditsChoice;
@@ -1448,6 +1836,6 @@ int main()
 	sleep(2);
 	cout << "Starting!";
 	sleep(1);
-	ClearScreen(); // Clear screen to avoid any issues
+	ClearScreen(); // Clear screen to avoid any issues with spacing...
 	Menu(); // run Menu functions
 }
