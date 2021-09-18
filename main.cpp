@@ -1,8 +1,8 @@
 /*
-Skyy Civil
+Skyy Civil has too many bugs
 */
-//   LEGEND   \\
-
+//   LEGEND: TEXT ADVENTURE VERSION   \\
+#include <stdlib.h>
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
@@ -22,17 +22,20 @@ int LvlCount;
 int coins;
 string username;
 string password;
-	int playerAttack;
 
+	int playerAttack;
+	char* mySecret = getenv("crtl+n");
+int UpgradeNum;
 /*
 Declaring functions
 */
 int main();
 void Menu();
 void Login();
-void Credits();
+void Credits(); 
 void LevelStart();
 void GameMenu();
+void StoryMode();
 void LvlUp();
 int LvlWin();
 int LvlUpReq();
@@ -43,11 +46,17 @@ void ClearScreen();
 void ElementChange();
 void WeaponShop();
 void Codex();
+void DrawLine(int n, char symbol);
 void drawLine(int n, char symbol);
 void rules();
 int Casino();
 int CoinDrop();
 void Upgrades();
+void SecondCredits();
+int Upgrade();
+int WeaponStats();
+int MonsterLevelUp();
+
 /* No files, struct instead.
 
 structing monsters and hero and damage
@@ -81,7 +90,7 @@ struct Attacks {
 	string attack6;
 	string attack7;
 
-	// Add melee attacks (attakcs 5, 6, 7) \\
+	// Add melee attacks (attacks 5, 6, 7) \\
 	Now I can put text here that wont effect the code.
 	int damageAttack1;
 	int damageAttack2;
@@ -93,10 +102,10 @@ struct Attacks {
 
 	// Mana used per attack, attacks 5, 6, 7 are melee and do not use mana
 
-	int manaAttack1;
-	int manaAttack2;
-	int manaAttack3;
-	int manaAttack4;
+	int manaAttack1 =10;
+	int manaAttack2 =20;
+	int manaAttack3 =30;
+	int manaAttack4 =50;
 	int manaAttack5 = 0;
 	int manaAttack6 = 0;
 	int manaAttack7 = 0;
@@ -192,6 +201,52 @@ struct Element {
 	string element4;
 };
 
+// Weapon stats
+struct WeaponStats{
+	string WeaponName;
+	int damage;
+	
+	int power;
+};
+
+
+/*
+		Global constructors
+*/
+
+struct Hero player;
+struct Attacks playerAttacks;
+struct Attacks monsterAttacks;
+struct Inventory playerInv;
+struct Monster levelMonster;
+struct PotionShop elemShopChoice;
+struct Element elems;
+struct WeaponShop weapons;
+struct WeaponStats weaponStat;
+struct WeaponStats weaponStatC;
+
+
+// Ascii global constructors
+struct CodexAscii HeroAscii;
+struct CodexAscii MonsterAscii;
+struct CodexAscii PotionAscii;
+struct CodexAscii WeaponAscii;
+
+// Effect on weapons
+
+
+
+// Upgrading weapons
+
+int Upgrade(){
+weaponStat.damage += 100;
+weaponStat.power += 100;
+UpgradeNum += 1;
+	
+	return Upgrade();
+}
+
+
 // Clear screen, pretty pathetic eh?
 void ClearScreen()
 {
@@ -240,36 +295,22 @@ int LvlWin() {
 int LvlUp(int XP, int Lvl) {
 	Lvl += XP / LvlUpReq(XP, Lvl);
 	XP = 0;
+	levelMonster.monsterHealth +=100;
 	return Lvl;
-
+	return levelMonster.monsterHealth;
+	
 }
-/*
-		Global constructors
-*/
 
-struct Hero player;
-struct Attacks playerAttacks;
-struct Attacks monsterAttacks;
-struct Inventory playerInv;
-struct Monster levelMonster;
-struct PotionShop elemShopChoice;
-struct Element elems;
-struct WeaponShop weapons;
 
-// Ascii global
-struct CodexAscii HeroAscii;
-struct CodexAscii MonsterAscii;
-struct CodexAscii PotionAscii;
-struct CodexAscii WeaponAscii;
+
 
 /*
-	Casino
+	Upgrades
 */
-
 
 void Upgrades(){
 	// Upgrades tab soon
-
+	string op;
 	string upgradeChoice;
 	cout << 
 "██╗░░░██╗██████╗░░██████╗░██████╗░░█████╗░██████╗░███████╗░██████╗\n"
@@ -287,7 +328,41 @@ void Upgrades(){
 	// if statements
 
 	if(upgradeChoice == "a"){
-			cout << "Upgrade this weapon: ";
+
+		if (weapons.item1 == weapons.equippedItem1){
+			cout << "Upgrade this weapon: " << weapons.equippedItem1 << "?" <<  endl;
+			cout << "(a) Confirm\n(b) Cancel\n> ";
+			cin >> op;
+			if (op == "a"){
+				cout << "";
+			}
+			if (op =="b")
+			{
+				cout << "WIP";
+			}
+			}
+
+		if (weapons.item2 == weapons.equippedItem2){
+			cout << "Upgrade this weapon: " << weapons.equippedItem2  << "?" << endl;
+
+			}
+
+		if (weapons.item3 == weapons.equippedItem3){
+			cout << "Upgrade this weapon: " << weapons.equippedItem3  << "?" << endl;
+			}
+			if (weapons.item3 == weapons.equippedItem4){
+			cout << "Upgrade this weapon: " << weapons.equippedItem4  << "?" << endl;
+
+			}
+			if (weapons.item3 == weapons.equippedItem5){
+			cout << "Upgrade this weapon: " << weapons.equippedItem5  << "?" << endl;
+			}
+			if (weapons.item3 == weapons.equippedItem6){
+			cout << "Upgrade this weapon: " << weapons.equippedItem6  << "?" << endl;
+
+			}
+		
+		
 	}
 
 	if(upgradeChoice == "b"){
@@ -307,22 +382,33 @@ int Casino()
     int guess;
     int dice; // hold computer generated number
     char choice;
+    string u;
  
     srand(time(0)); // "Seed" the random generator
 
-    drawLine(60,'_');
-    cout << "\n\n\n\t\t"
+    
+    cout << "\n\n\n\t"
 "░█████╗░░█████╗░░██████╗██╗███╗░░██╗░█████╗░\n"
 "██╔══██╗██╔══██╗██╔════╝██║████╗░██║██╔══██╗\n"
 "██║░░╚═╝███████║╚█████╗░██║██╔██╗██║██║░░██║\n"
 "██║░░██╗██╔══██║░╚═══██╗██║██║╚████║██║░░██║\n"
 "╚█████╔╝██║░░██║██████╔╝██║██║░╚███║╚█████╔╝\n"
 "░╚════╝░╚═╝░░╚═╝╚═════╝░╚═╝╚═╝░░╚══╝░╚════╝░\n\n\n\n";
-    drawLine(60,'_');
- 
+  
+ cout << "(a) Play Casino\n";
+ cout << "(b) Back to Story\n";
+ cin >> u;
+ if (u == "b"){
+	 ClearScreen();
+	 sleep(1);
+	 StoryMode();
+ }
+ if (u == "a"){
 
  
-    cout << "\n\nEnter Deposit amount to play : $";
+ 
+    
+cout << "Enter deposit amount\n\n";
     cin >> amount;
 		while(ui == 100){
 			if(amount > coins){
@@ -333,7 +419,7 @@ int Casino()
     do
     { // This is a Do While loop (I hate these so much)
         system("cls"); // Just a basic system file declaration
-        rules(); // Allows you to have the option to display the rules
+         // Allows you to have the option to display the 
         cout << "\n\nYour current balance is " << amount << "\n"; // Shows player's coin balance
 		
 		// Get player's betting amount
@@ -353,7 +439,7 @@ int Casino()
             cin >> guess;
             if(guess <= 0 || guess > 10)
                 cout << "Please check the number!! should be between 1 to 10\n"
-                    <<"\nRe-enter data\n ";
+                    <<"\nRe-enter data`\n ";
         }while(guess <= 0 || guess > 10);
  
         dice = rand()%10 + 1;
@@ -366,7 +452,7 @@ int Casino()
         }
         else
         {
-            cout << "Bad Luck this time !! You lost $ "<< bettingAmount <<"\n";
+            cout << "Bad Luck this time !! You lost $ "<< bettingAmount << "\n";
             amount = amount - bettingAmount;
 						coins -= bettingAmount;
         }
@@ -383,33 +469,20 @@ int Casino()
     }while(choice =='Y'|| choice=='y');
     
     cout << "\n\n\n";
-    drawLine(70,'=');
+    
     cout << "\n\nThanks for playing game. Your balance amount is $ " << amount << "\n\n";
-    drawLine(70,'=');
+    sleep(2);
+    ClearScreen();
+    StoryMode();
 		}
-    return 0;
-		
+    
+ }
+ return 0;
 }
  
-void drawLine(int n, char symbol)
-{
-    for(int i=0; i<n; i++)
-        cout << symbol;
-    cout << "\n" ;
-}
- 
-void rules()
-{
-    system("cls");
-    cout << "\n\n";
-    drawLine(80,'-');
-    cout << "\t\tRULES OF THE GAME\n";
-    drawLine(80,'-');
-    cout << "\t1. Choose any number between 1 to 10\n";
-    cout << "\t2. If you win you will get 10 times of money you bet\n";
-    cout << "\t3. If you bet on wrong number you will lose your betting amount\n\n";
-    drawLine(80,'-');
-}
+
+    
+
 
 
 
@@ -527,8 +600,8 @@ ClearScreen();
 
 
 	if(CodexChoice == "b"){
-		// Show monsters
-		// Monster names
+	// Display here (I forgot)
+
 	}
 
 	if(CodexChoice == "c"){
@@ -609,6 +682,7 @@ void WeaponShop() {
 
 	int ui = 100;
 	string weaponshopChoice;
+	string EnteredPass;
 	cout << 
 "░██╗░░░░░░░██╗███████╗░█████╗░██████╗░░█████╗░███╗░░██╗░██████╗\n"
 "░██║░░██╗░░██║██╔════╝██╔══██╗██╔══██╗██╔══██╗████╗░██║██╔════╝\n"
@@ -664,13 +738,13 @@ void WeaponShop() {
 			if (weaponshopChoice == "a") {
 				ClearScreen();
 				cout << "Enter your password: ";
-				cin >> weaponshopChoice;
-				if (weaponshopChoice == password) {
+				cin >> EnteredPass;
+				if (EnteredPass == password) {
 					
 					coins -= weapons.price1;
 					weapons.item1 = weapons.equippedItem1;
 				}
-				if (weaponshopChoice != password) {
+				if (EnteredPass != password) {
 					cout << "password invalid!";
 					sleep(2);
 					ClearScreen();
@@ -707,12 +781,12 @@ void WeaponShop() {
 			if (weaponshopChoice == "a") {
 				ClearScreen();
 				cout << "Enter your password: ";
-				cin >> weaponshopChoice;
-				if (weaponshopChoice == password) {
+				cin >> EnteredPass;
+				if (EnteredPass == password) {
 						coins -= weapons.price2;
 					weapons.item2 = weapons.equippedItem2;
 				}
-				if (weaponshopChoice != password) {
+				if (EnteredPass != password) {
 					cout << "password invalid!";
 					sleep(2);
 					ClearScreen();
@@ -749,13 +823,13 @@ void WeaponShop() {
 			if (weaponshopChoice == "a") {
 				ClearScreen();
 				cout << "Enter your password: ";
-				cin >> weaponshopChoice;
-				if (weaponshopChoice == password) {
+				cin >> EnteredPass;
+				if (EnteredPass == password) {
 
 					coins -= weapons.price3;
 					weapons.item3 = weapons.equippedItem3;
 				}
-				if (weaponshopChoice != password) {
+				if (EnteredPass != password) {
 					cout << "password invalid!";
 					sleep(2);
 					ClearScreen();
@@ -792,12 +866,12 @@ void WeaponShop() {
 			if (weaponshopChoice == "a") {
 				ClearScreen();
 				cout << "Enter your password: ";
-				cin >> weaponshopChoice;
-				if (weaponshopChoice == password) {
+				cin >> EnteredPass;
+				if (EnteredPass == password) {
 					coins -= weapons.price4;
 					weapons.item4 = weapons.equippedItem4;
 				}
-				if (weaponshopChoice != password) {
+				if (EnteredPass != password) {
 					cout << "password invalid!";
 					sleep(2);
 					ClearScreen();
@@ -834,12 +908,12 @@ void WeaponShop() {
 			if (weaponshopChoice == "a") {
 				ClearScreen();
 				cout << "Enter your password: ";
-				cin >> weaponshopChoice;
-				if (weaponshopChoice == password) {
+				cin >> EnteredPass;
+				if (EnteredPass == password) {
 					coins -= weapons.price5;
 					weapons.item5 = weapons.equippedItem5;
 				}
-				if (weaponshopChoice != password) {
+				if (EnteredPass != password) {
 					cout << "password invalid!";
 					sleep(2);
 					ClearScreen();
@@ -877,12 +951,12 @@ void WeaponShop() {
 			if (weaponshopChoice == "a") {
 				ClearScreen();
 				cout << "Enter your password: ";
-				cin >> weaponshopChoice;
-				if (weaponshopChoice == password) {
+				cin >> EnteredPass;
+				if (EnteredPass == password) {
 					coins -= weapons.price6;
 					weapons.item6 = weapons.equippedItem6;
 				}
-				if (weaponshopChoice != password) {
+				if (EnteredPass != password) {
 					cout << "password invalid!";
 					sleep(2);
 					ClearScreen();
@@ -963,6 +1037,7 @@ void PotionShop(int coins) {
 	int choice;
 	elemShopChoice.item1 = "Small health potion";
 	elemShopChoice.item1Price = 100;
+	//elems
 	elemShopChoice.item2 = "Medium potion";
 	elemShopChoice.item2Price = 300;
 	elemShopChoice.item3 = "Large potion";
@@ -985,6 +1060,7 @@ void PotionShop(int coins) {
 		cin >> choice;
 
 		if (choice == 1) {
+			ClearScreen();
 			if (coins >= elemShopChoice.item1Price) {
 				playerInv.purchasedItem1 = elemShopChoice.item1;
 				playerInv.item1cnt += 1;
@@ -999,6 +1075,7 @@ void PotionShop(int coins) {
 		}
 
 		if (choice == 2) {
+			ClearScreen();
 			if (coins >= elemShopChoice.item2Price) {
 				playerInv.purchasedItem1 = elemShopChoice.item2;
 				playerInv.item2cnt += 1;
@@ -1011,6 +1088,7 @@ void PotionShop(int coins) {
 
 		}
 		if (choice == 3) {
+			ClearScreen();
 			if (coins >= elemShopChoice.item3Price) {
 				playerInv.purchasedItem1 = elemShopChoice.item3;
 				playerInv.item3cnt += 1;
@@ -1127,17 +1205,8 @@ void LevelStart(int XP, int Lvl) {
 		playerAttacks.manaAttack4 = 60;
 	}
 
-	playerAttacks.attack5 = "Punch";
-	playerAttacks.attack6 = "Punch Combo";
-	playerAttacks.attack7 = "Heavy Punch Combo";
-			playerAttacks.damageAttack5 = 3;
-		playerAttacks.damageAttack6 = 7;
-		playerAttacks.damageAttack7 = 10;
-
-		playerAttacks.manaAttack1 = 0;
-		playerAttacks.manaAttack2 = 0;
-		playerAttacks.manaAttack3 = 0;
-		playerAttacks.manaAttack4 = 0;
+	
+		
 	if (weapons.item1 == weapons.equippedItem1) {
 		// Knife attacks
 		playerAttacks.attack5 = "Basic slash";
@@ -1222,8 +1291,18 @@ playerAttacks.damageAttack5 = 15;
 		playerAttacks.manaAttack6 = 0;
 		playerAttacks.manaAttack7 = 0;
 	}
+	 
+	
+	playerAttacks.attack5 = "Punch";
+	playerAttacks.attack6 = "Punch Combo";
+	playerAttacks.attack7 = "Heavy Punch Combo";
+			playerAttacks.damageAttack5 = 3;
+		playerAttacks.damageAttack6 = 7;
+		playerAttacks.damageAttack7 = 10;
 
-
+		playerAttacks.manaAttack5 = 0;
+		playerAttacks.manaAttack6 = 0;
+		playerAttacks.manaAttack7 = 0;
 
 	// Monster attacks and stats
 
@@ -1231,14 +1310,15 @@ playerAttacks.damageAttack5 = 15;
 	levelMonster.monsterType = "Phynxis";
 
 
-	string monsterAttack[3] = { "Bash", "Spin Attack", "Heavy Punch" };
-	int monsterAttackDamage[3] = { 10, 15, 50 };
+	string monsterAttack[5] = { "Bash", "Spin Attack", "Heavy Punch", "Blind Rage", "Power Combo" };
+	int monsterAttackDamage[8] = { 0, 10, 15, 40, 18, 5, 30, 50 };
 	levelMonster.monsterHealth = 200 + LvlCount * 1.5;
 
 
 
 	// -----------------MAKING ATTACKS---------------------\\
-		cout << "\nHP: " << player.health << endl;
+		cout << "HP: " << player.health;
+		cout << "\nMANA: " << player.mana << endl;
 	cout << "Monsters: " << levelMonster.monsterCount << endl;
 	cout << "Monster HP: " << levelMonster.monsterHealth << endl;
 	cout << "\n\n Monster type: " << levelMonster.monsterType << endl;
@@ -1259,16 +1339,21 @@ playerAttacks.damageAttack5 = 15;
 	while ((levelMonster.monsterCount = 1)) {
 		cin >> playerAttack;
 		// Attack 1 Loop
-		if (playerAttack == 1) {
+		if (playerAttack == 1 && player.mana >= playerAttacks.manaAttack1) {
 			ClearScreen();
 			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack1;
-			int RandAtk = rand() % 3;
-			int RandDmg = rand() % 3;
+			int RandAtk = rand() % 5;
+			int RandDmg = rand() % 8;
 			player.mana -= playerAttacks.manaAttack1;
+			ClearScreen();
+			cout << "You used " << playerAttacks.attack1 << " And dealt " << playerAttacks.damageAttack1 << endl;
+			sleep(1);
+			ClearScreen();
 			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			player.health = player.health - monsterAttackDamage[RandDmg];
-
-			cout << "\nHP: " << player.health << endl;
+			sleep(1);
+			ClearScreen();
+			cout << "HP: " << player.health << endl;
 			cout << "\nMana: " << player.mana << endl;
 			cout << "\nMonsters: " << levelMonster.monsterCount << endl;
 			cout << "Monster health: " << levelMonster.monsterHealth << endl;
@@ -1285,22 +1370,49 @@ playerAttacks.damageAttack5 = 15;
 			cout << "\n\n (8) Inventory";
 			cout << "\n > ";
 
-			if (player.mana < playerAttacks.manaAttack1) {
-				cout << "Not enough Mana!\n > ";
-			}
+			
 
 		}
+		if (player.mana < playerAttacks.manaAttack1) {
+			ClearScreen();
+			sleep(1);
+				cout << "Not enough Mana!\n > ";
+				sleep(1);
+				ClearScreen();
+				cout << "HP: " << player.health << endl;
+			cout << "\nMana: " << player.mana << endl;
+			cout << "\nMonsters: " << levelMonster.monsterCount << endl;
+			cout << "Monster health: " << levelMonster.monsterHealth << endl;
+			cout << "\n\n Monster type: " << levelMonster.monsterType;
+			cout << "\n\n\nMAGIC ATTACKS\n";
+			cout << "\n\n (1) " << playerAttacks.attack1 << " DMG-" << playerAttacks.damageAttack1 << "     Mana-" << playerAttacks.manaAttack1;
+			cout << "\n\n (2) " << playerAttacks.attack2 << " DMG-" << playerAttacks.damageAttack2 << "     Mana-" << playerAttacks.manaAttack2;
+			cout << "\n\n (3) " << playerAttacks.attack3 << " DMG-" << playerAttacks.damageAttack3 << "     Mana-" << playerAttacks.manaAttack3;
+			cout << "\n\n (4) " << playerAttacks.attack4 << " DMG-" << playerAttacks.damageAttack4 << "     Mana-" << playerAttacks.manaAttack4;
+			cout << "\n\n\nMELEE ATTACKS\n";
+			cout << "\n\n (5) " << playerAttacks.attack5 << " DMG-" << playerAttacks.damageAttack5 << "     Mana-" << playerAttacks.manaAttack5;
+			cout << "\n\n (6) " << playerAttacks.attack6 << " DMG-" << playerAttacks.damageAttack6 << "     Mana-" << playerAttacks.manaAttack6;
+			cout << "\n\n (7) " << playerAttacks.attack7 << " DMG-" << playerAttacks.damageAttack7 << "     Mana-" << playerAttacks.manaAttack7;
+			cout << "\n\n (8) Inventory";
+			cout << "\n > ";
+			}
 
 		// Attack 2 loop
-		if (playerAttack == 2) {
+		if (playerAttack == 2 && player.mana >= playerAttacks.manaAttack2) {
 			ClearScreen();
-			int RandAtk = rand() % 3;
-			int RandDmg = rand() % 3;
+			int RandAtk = rand() % 5;
+			int RandDmg = rand() % 8;
 			player.mana -= playerAttacks.manaAttack2;
+			ClearScreen();
+			cout << "You used " << playerAttacks.attack2 << " And dealt " << playerAttacks.damageAttack2 << endl;
+			sleep(1);
+			ClearScreen();
 			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack2;
+			sleep(1);
+			ClearScreen();
 			cout << "HP: " << player.health << endl;
-			cout << "\nMana: " << player.mana << endl;
+			cout << "Mana: " << player.mana << endl;
 			cout << "Monsters: " << levelMonster.monsterCount << endl;
 			cout << "Monster health: " << levelMonster.monsterHealth;
 			cout << "\n\n Monster type: " << levelMonster.monsterType;
@@ -1315,51 +1427,48 @@ playerAttacks.damageAttack5 = 15;
 			cout << "\n\n (7) " << playerAttacks.attack7 << " DMG-" << playerAttacks.damageAttack7 << "     Mana-" << playerAttacks.manaAttack7;
 			cout << "\n\n (8) Inventory";
 			cout << "\n > ";
-			if (player.mana < playerAttacks.manaAttack2) {
-				cout << "Not enough Mana!\n > ";
-			}
+			
 		}
+		if (player.mana < playerAttacks.manaAttack2) {
+			ClearScreen();
+			sleep(1);
+				cout << "Not enough Mana!\n > ";
+				sleep(1);
+				ClearScreen();
+				cout << "HP: " << player.health << endl;
+			cout << "Mana: " << player.mana << endl;
+			cout << "Monsters: " << levelMonster.monsterCount << endl;
+			cout << "Monster health: " << levelMonster.monsterHealth;
+			cout << "\n\n Monster type: " << levelMonster.monsterType;
+			cout << "\n\n\nMAGIC ATTACKS\n";
+			cout << "\n\n (1) " << playerAttacks.attack1 << " DMG-" << playerAttacks.damageAttack1 << "     Mana-" << playerAttacks.manaAttack1;
+			cout << "\n\n (2) " << playerAttacks.attack2 << " DMG-" << playerAttacks.damageAttack2 << "     Mana-" << playerAttacks.manaAttack2;
+			cout << "\n\n (3) " << playerAttacks.attack3 << " DMG-" << playerAttacks.damageAttack3 << "     Mana-" << playerAttacks.manaAttack3;
+			cout << "\n\n (4) " << playerAttacks.attack4 << " DMG-" << playerAttacks.damageAttack4 << "     Mana-" << playerAttacks.manaAttack4;
+			cout << "\n\n\nMELEE ATTACKS\n";
+			cout << "\n\n (5) " << playerAttacks.attack5 << " DMG-" << playerAttacks.damageAttack5 << "     Mana-" << playerAttacks.manaAttack5;
+			cout << "\n\n (6) " << playerAttacks.attack6 << " DMG-" << playerAttacks.damageAttack6 << "     Mana-" << playerAttacks.manaAttack6;
+			cout << "\n\n (7) " << playerAttacks.attack7 << " DMG-" << playerAttacks.damageAttack7 << "     Mana-" << playerAttacks.manaAttack7;
+			cout << "\n\n (8) Inventory";
+			cout << "\n > ";
+				
+			}
 
 		// Attack 3 loop
 
-		if (playerAttack == 3) {
+		if (playerAttack == 3 && player.mana >= playerAttacks.manaAttack3) {
 			ClearScreen();
-			int RandAtk = rand() % 3;
-			int RandDmg = rand() % 3;
+			int RandAtk = rand() % 5;
+			int RandDmg = rand() % 8;
 			player.mana -= playerAttacks.manaAttack3;
+			ClearScreen();
+			cout << "You used " << playerAttacks.attack3 << " And dealt " << playerAttacks.damageAttack3 << endl;
+			sleep(1);
+			ClearScreen();
 			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack3;
-			cout << "\nHP: " << player.health << endl;
-			cout << "\nMana: " << player.mana << endl;
-			cout << "Monsters: " << levelMonster.monsterCount << endl;
-			cout << "Monster health: " << levelMonster.monsterHealth;
-			cout << "\n\n Monster type: " << levelMonster.monsterType;
-			cout << "\n\n\nMAGIC ATTACKS\n";
-			cout << "\n\n (1) " << playerAttacks.attack1 << " DMG-" << playerAttacks.damageAttack1 << "     Mana-" << playerAttacks.manaAttack1;
-			cout << "\n\n (2) " << playerAttacks.attack2 << " DMG-" << playerAttacks.damageAttack2 << "     Mana-" << playerAttacks.manaAttack2;
-			cout << "\n\n (3) " << playerAttacks.attack3 << " DMG-" << playerAttacks.damageAttack3 << "     Mana-" << playerAttacks.manaAttack3;
-			cout << "\n\n (4) " << playerAttacks.attack4 << " DMG-" << playerAttacks.damageAttack4 << "     Mana-" << playerAttacks.manaAttack4;
-			cout << "\n\n\nMELEE ATTACKS\n";
-			cout << "\n\n (5) " << playerAttacks.attack5 << " DMG-" << playerAttacks.damageAttack5 << "     Mana-" << playerAttacks.manaAttack5;
-			cout << "\n\n (6) " << playerAttacks.attack6 << " DMG-" << playerAttacks.damageAttack6 << "     Mana-" << playerAttacks.manaAttack6;
-			cout << "\n\n (7) " << playerAttacks.attack7 << " DMG-" << playerAttacks.damageAttack7 << "     Mana-" << playerAttacks.manaAttack7;
-			cout << "\n\n (8) Inventory";
-			cout << "\n > ";
-			if (player.mana < playerAttacks.manaAttack3) {
-				cout << "Not enough Mana!\n > ";
-			}
-		}
-
-		// Attack 4 loop
-		if (playerAttack == 4) {
+			sleep(1);
 			ClearScreen();
-			// Random monster attacks
-			int RandAtk = rand() % 3;
-			int RandDmg = rand() % 3;
-			player.mana -= playerAttacks.manaAttack4;
-			player.health -= monsterAttackDamage[RandDmg];
-			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack4;
-			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			cout << "HP: " << player.health << endl;
 			cout << "\nMana: " << player.mana << endl;
 			cout << "Monsters: " << levelMonster.monsterCount << endl;
@@ -1376,24 +1485,108 @@ playerAttacks.damageAttack5 = 15;
 			cout << "\n\n (7) " << playerAttacks.attack7 << " DMG-" << playerAttacks.damageAttack7 << "     Mana-" << playerAttacks.manaAttack7;
 			cout << "\n\n (8) Inventory";
 			cout << "\n > ";
-			if (player.mana < playerAttacks.manaAttack4) {
-				cout << "Not enough Mana!\n > ";
-			}
+			
 		}
-
+if (player.mana < playerAttacks.manaAttack3) {
+	ClearScreen();
+	sleep(1);
+				cout << "Not enough Mana!\n > ";
+				sleep(1);
+				ClearScreen();
+				cout << "HP: " << player.health << endl;
+			cout << "Mana: " << player.mana << endl;
+			cout << "Monsters: " << levelMonster.monsterCount << endl;
+			cout << "Monster health: " << levelMonster.monsterHealth;
+			cout << "\n\n Monster type: " << levelMonster.monsterType;
+			cout << "\n\n\nMAGIC ATTACKS\n";
+			cout << "\n\n (1) " << playerAttacks.attack1 << " DMG-" << playerAttacks.damageAttack1 << "     Mana-" << playerAttacks.manaAttack1;
+			cout << "\n\n (2) " << playerAttacks.attack2 << " DMG-" << playerAttacks.damageAttack2 << "     Mana-" << playerAttacks.manaAttack2;
+			cout << "\n\n (3) " << playerAttacks.attack3 << " DMG-" << playerAttacks.damageAttack3 << "     Mana-" << playerAttacks.manaAttack3;
+			cout << "\n\n (4) " << playerAttacks.attack4 << " DMG-" << playerAttacks.damageAttack4 << "     Mana-" << playerAttacks.manaAttack4;
+			cout << "\n\n\nMELEE ATTACKS\n";
+			cout << "\n\n (5) " << playerAttacks.attack5 << " DMG-" << playerAttacks.damageAttack5 << "     Mana-" << playerAttacks.manaAttack5;
+			cout << "\n\n (6) " << playerAttacks.attack6 << " DMG-" << playerAttacks.damageAttack6 << "     Mana-" << playerAttacks.manaAttack6;
+			cout << "\n\n (7) " << playerAttacks.attack7 << " DMG-" << playerAttacks.damageAttack7 << "     Mana-" << playerAttacks.manaAttack7;
+			cout << "\n\n (8) Inventory";
+			cout << "\n > ";
+			}
+		// Attack 4 loop
+		if (playerAttack == 4 && player.mana >= playerAttacks.manaAttack4) {
+			ClearScreen();
+			// Random monster attacks
+			int RandAtk = rand() % 5;
+			int RandDmg = rand() % 8;
+			player.mana -= playerAttacks.manaAttack4;
+			player.health -= monsterAttackDamage[RandDmg];
+			ClearScreen();
+			cout << "You used " << playerAttacks.attack4 << " And dealt " << playerAttacks.damageAttack4 << endl;
+			sleep(2);
+			ClearScreen();
+			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack4;
+			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
+			sleep(1);
+			ClearScreen();
+			cout << "HP: " << player.health << endl;
+			cout << "Mana: " << player.mana << endl;
+			cout << "Monsters: " << levelMonster.monsterCount << endl;
+			cout << "Monster health: " << levelMonster.monsterHealth;
+			cout << "\n\n Monster type: " << levelMonster.monsterType;
+			cout << "\n\n\nMAGIC ATTACKS\n";
+			cout << "\n\n (1) " << playerAttacks.attack1 << " DMG-" << playerAttacks.damageAttack1 << "     Mana-" << playerAttacks.manaAttack1;
+			cout << "\n\n (2) " << playerAttacks.attack2 << " DMG-" << playerAttacks.damageAttack2 << "     Mana-" << playerAttacks.manaAttack2;
+			cout << "\n\n (3) " << playerAttacks.attack3 << " DMG-" << playerAttacks.damageAttack3 << "     Mana-" << playerAttacks.manaAttack3;
+			cout << "\n\n (4) " << playerAttacks.attack4 << " DMG-" << playerAttacks.damageAttack4 << "     Mana-" << playerAttacks.manaAttack4;
+			cout << "\n\n\nMELEE ATTACKS\n";
+			cout << "\n\n (5) " << playerAttacks.attack5 << " DMG-" << playerAttacks.damageAttack5 << "     Mana-" << playerAttacks.manaAttack5;
+			cout << "\n\n (6) " << playerAttacks.attack6 << " DMG-" << playerAttacks.damageAttack6 << "     Mana-" << playerAttacks.manaAttack6;
+			cout << "\n\n (7) " << playerAttacks.attack7 << " DMG-" << playerAttacks.damageAttack7 << "     Mana-" << playerAttacks.manaAttack7;
+			cout << "\n\n (8) Inventory";
+			cout << "\n > ";
+			
+		}
+			if (player.mana < playerAttacks.manaAttack4) {
+				ClearScreen();
+				sleep(1);
+				cout << "Not enough Mana!\n > ";
+				sleep(1);
+				ClearScreen();
+				cout << "HP: " << player.health << endl;
+			cout << "Mana: " << player.mana << endl;
+			cout << "Monsters: " << levelMonster.monsterCount << endl;
+			cout << "Monster health: " << levelMonster.monsterHealth;
+			cout << "\n\n Monster type: " << levelMonster.monsterType;
+			cout << "\n\n\nMAGIC ATTACKS\n";
+			cout << "\n\n (1) " << playerAttacks.attack1 << " DMG-" << playerAttacks.damageAttack1 << "     Mana-" << playerAttacks.manaAttack1;
+			cout << "\n\n (2) " << playerAttacks.attack2 << " DMG-" << playerAttacks.damageAttack2 << "     Mana-" << playerAttacks.manaAttack2;
+			cout << "\n\n (3) " << playerAttacks.attack3 << " DMG-" << playerAttacks.damageAttack3 << "     Mana-" << playerAttacks.manaAttack3;
+			cout << "\n\n (4) " << playerAttacks.attack4 << " DMG-" << playerAttacks.damageAttack4 << "     Mana-" << playerAttacks.manaAttack4;
+			cout << "\n\n\nMELEE ATTACKS\n";
+			cout << "\n\n (5) " << playerAttacks.attack5 << " DMG-" << playerAttacks.damageAttack5 << "     Mana-" << playerAttacks.manaAttack5;
+			cout << "\n\n (6) " << playerAttacks.attack6 << " DMG-" << playerAttacks.damageAttack6 << "     Mana-" << playerAttacks.manaAttack6;
+			cout << "\n\n (7) " << playerAttacks.attack7 << " DMG-" << playerAttacks.damageAttack7 << "     Mana-" << playerAttacks.manaAttack7;
+			cout << "\n\n (8) Inventory";
+			cout << "\n > ";
+			}
 		// Attack 5 loop
 		if (playerAttack == 5) { // An If statement
 			ClearScreen(); // clears the screen using the ClearScreen function up at line 194? i think, somewhere around there
 			// Random monster attacks
-			int RandAtk = rand() % 3; // randomizes monsters attack
-			int RandDmg = rand() % 3; // randomizes monsters attack damage
+			
+			int RandAtk = rand() % 5; // randomizes monsters attack
+			int RandDmg = rand() % 8; // randomizes monsters attack damage
 			player.mana -= playerAttacks.manaAttack5; // player mana is depleted by the amoun of mana it COSTS to use the previous attack (attack 5)
 			player.mana += 9; // Player mana goes up by 9 (because this is a melee attack)
 			player.health = player.health - monsterAttackDamage[RandDmg]; // Player health is depleted from monsters attack
 			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack5; // monster health is depleted by player's attack
+			ClearScreen();
+			cout << "You used " << playerAttacks.attack5 << " And dealt " << playerAttacks.damageAttack5 << endl;
+			sleep(2);
+			ClearScreen();
 			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl; // Shows what attack the monster used and how much damage it dealt (randoms are complicated so I wont teach you that yet)
+			sleep(1);
+			ClearScreen();
 			cout << "HP: " << player.health << endl; // Shows player HP
-			cout << "\nMana: " << player.mana << endl; // Shows player Mana (energy)
+			cout << "Mana: " << player.mana << endl; // Shows player Mana (energy)
 			cout << "Monsters: " << levelMonster.monsterCount << endl; // Shows how many monsters are left
 			cout << "Monster health: " << levelMonster.monsterHealth; // Shows monster health
 			cout << "\n\n Monster type: " << levelMonster.monsterType; // Monster type
@@ -1411,23 +1604,25 @@ playerAttacks.damageAttack5 = 15;
 			cout << "\n\n (8) Inventory";
 			cout << "\n > ";
 
-			if (player.mana < playerAttacks.manaAttack5)
-			{
-
-				cout << "Not enough Mana!\n > ";
-			}
+			
 		}
+		
 		if (playerAttack == 6) {
 			ClearScreen();
 			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack6;
-			int RandAtk = rand() % 3;
-			int RandDmg = rand() % 3;
+			int RandAtk = rand() % 5;
+			int RandDmg = rand() % 8;
 			player.mana -= playerAttacks.manaAttack6;
+			ClearScreen();
+			cout << "You used " << playerAttacks.attack6 << " And dealt " << playerAttacks.damageAttack6 << endl;
+			sleep(2);
+			ClearScreen();
 			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			player.health = player.health - monsterAttackDamage[RandDmg];
-
-			cout << "\nHP: " << player.health << endl;
-			cout << "\nMana: " << player.mana << endl;
+			sleep(1);
+			ClearScreen();
+			cout << "HP: " << player.health << endl;
+			cout << "Mana: " << player.mana << endl;
 			cout << "\nMonsters: " << levelMonster.monsterCount << endl;
 			cout << "Monster health: " << levelMonster.monsterHealth << endl;
 			cout << "\n\n Monster type: " << levelMonster.monsterType;
@@ -1443,23 +1638,27 @@ playerAttacks.damageAttack5 = 15;
 			cout << "\n\n (8) Inventory";
 			cout << "\n > ";
 
-			if (player.mana < playerAttacks.manaAttack6) {
-				cout << "Not enough Mana!\n > ";
-			}
+			
 
 		}
+		
 
 		if (playerAttack == 7) {
 			ClearScreen();
 			levelMonster.monsterHealth = levelMonster.monsterHealth - playerAttacks.damageAttack7;
-			int RandAtk = rand() % 3;
-			int RandDmg = rand() % 3;
+			int RandAtk = rand() % 5;
+			int RandDmg = rand() % 8;
 			player.mana -= playerAttacks.manaAttack7;
+			ClearScreen();
+			cout << "You used " << playerAttacks.attack7 << " And dealt " << playerAttacks.damageAttack7 << endl;
+			sleep(2);
+			ClearScreen();
 			cout << endl << levelMonster.monsterType << " used " << monsterAttack[RandAtk] << " and dealt " << monsterAttackDamage[RandDmg] << endl;
 			player.health = player.health - monsterAttackDamage[RandDmg];
-
-			cout << "\nHP: " << player.health << endl;
-			cout << "\nMana: " << player.mana << endl;
+			sleep(1);
+			ClearScreen();
+			cout << "HP: " << player.health << endl;
+			cout << "Mana: " << player.mana << endl;
 			cout << "\nMonsters: " << levelMonster.monsterCount << endl;
 			cout << "Monster health: " << levelMonster.monsterHealth << endl;
 			cout << "\n\n Monster type: " << levelMonster.monsterType;
@@ -1475,9 +1674,7 @@ playerAttacks.damageAttack5 = 15;
 			cout << "\n\n (8) Inventory";
 			cout << "\n > ";
 
-			if (player.mana < playerAttacks.manaAttack7) {
-				cout << "Not enough Mana!\n > ";
-			}
+			
 
 		}
 
@@ -1488,8 +1685,9 @@ playerAttacks.damageAttack5 = 15;
 			cout << "(1) Item 1 " << playerInv.purchasedItem1 << " HP+ " << playerInv.HP1;
 			cout << "\n\n(2) Item 2 " << playerInv.purchasedItem2 << " HP+ " << playerInv.HP2;
 			cout << "\n\n(3) Item 3 " << playerInv.purchesedItem3 << " HP+ " << playerInv.HP3;
-			cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
 			cout << "\n Small potion count - " << playerInv.item1cnt << "\n Medium potion count - " << playerInv.item2cnt << "\n Large potion count - " << playerInv.item3cnt;
+			cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
+			
 			cout << "\n\n(5) Back to battle";
 			cout << "\n > ";
 			cin >> playerAttack;
@@ -1499,8 +1697,9 @@ playerAttacks.damageAttack5 = 15;
 				cout << "(1) Item 1 " << playerInv.purchasedItem1 << " HP+ " << playerInv.HP1;
 				cout << "\n\n(2) Item 2 " << playerInv.purchasedItem2 << " HP+ " << playerInv.HP2;
 				cout << "\n\n(3) Item 3 " << playerInv.purchesedItem3 << " HP+ " << playerInv.HP3;
-				cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
 				cout << "\n Small potion count - " << playerInv.item1cnt << "\n Medium potion count - " << playerInv.item2cnt << "\n Large potion count - " << playerInv.item3cnt;
+				cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
+				
 				cout << "\n\n(5) Back to battle";
 				cout << "\n > ";
 			}
@@ -1510,8 +1709,9 @@ playerAttacks.damageAttack5 = 15;
 				cout << "(1) Item 1 " << playerInv.purchasedItem1 << " HP+ " << playerInv.HP1;
 				cout << "\n\n(2) Item 2 " << playerInv.purchasedItem2 << " HP+ " << playerInv.HP2;
 				cout << "\n\n(3) Item 3 " << playerInv.purchesedItem3 << " HP+ " << playerInv.HP3;
-				cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
 				cout << "\n Small potion count - " << playerInv.item1cnt << "\n Medium potion count - " << playerInv.item2cnt << "\n Large potion count - " << playerInv.item3cnt;
+				cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
+				
 				cout << "\n\n(5) Back to battle";
 				cout << "\n > ";
 			}
@@ -1521,8 +1721,9 @@ playerAttacks.damageAttack5 = 15;
 				cout << "(1) Item 1 " << playerInv.purchasedItem1 << " HP+ " << playerInv.HP1;
 				cout << "\n\n(2) Item 2 " << playerInv.purchasedItem2 << " HP+ " << playerInv.HP2;
 				cout << "\n\n(3) Item 3 " << playerInv.purchesedItem3 << " HP+ " << playerInv.HP3;
-				cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
 				cout << "\n Small potion count - " << playerInv.item1cnt << "\n Medium potion count - " << playerInv.item2cnt << "\n Large potion count - " << playerInv.item3cnt;
+				cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
+				
 				cout << "\n\n(5) Back to battle";
 				cout << "\n > ";
 			}
@@ -1533,8 +1734,9 @@ playerAttacks.damageAttack5 = 15;
 					cout << "(1) Item 1 " << playerInv.purchasedItem1 << " HP+ " << playerInv.HP1;
 					cout << "\n\n(2) Item 2 " << playerInv.purchasedItem2 << " HP+ " << playerInv.HP2;
 					cout << "\n\n(3) Item 3 " << playerInv.purchesedItem3 << " HP+ " << playerInv.HP3;
-					cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
 					cout << "\n Small potion count - " << playerInv.item1cnt << "\n Medium potion count - " << playerInv.item2cnt << "\n Large potion count - " << playerInv.item3cnt;
+					cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
+					
 					cout << "\n\n(5) Back to battle";
 					cout << "\n > ";
 				}
@@ -1571,7 +1773,7 @@ playerAttacks.damageAttack5 = 15;
 				cout << "\n\n(2) Item 2 " << playerInv.purchasedItem2 << " HP+ " << playerInv.HP2;
 				cout << "\n\n(3) Item 3 " << playerInv.purchesedItem3 << " HP+ " << playerInv.HP3;
 				cout << "\n\n(4) Power Up " << playerInv.PowerUp << "HP+ " << playerInv.HP4;
-				cout << "\n Small potion count - " << playerInv.item1cnt << "\n Medium potion count - " << playerInv.item2cnt << "\n Large potion count - " << playerInv.item3cnt;
+				
 				cout << "\n\n(5) Back to battle";
 				cout << "\n > ";
 			}
@@ -1601,7 +1803,20 @@ playerAttacks.damageAttack5 = 15;
 		if (levelMonster.monsterHealth <= 0) {
 			
 			ClearScreen();
-			cout << "You win!\n";
+			cout <<
+"█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\n"
+"█░░░░░░░░██░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░████░░░░░░██████████░░░░░░█░░░░░░░░░░█░░░░░░██████████░░░░░░█░░░░░░█\n"
+"█░░▄▀▄▀░░██░░▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░██████████░░▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░░░░░░░░░██░░▄▀░░█░░▄▀░░█\n"
+"█░░░░▄▀░░██░░▄▀░░░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░██████████░░▄▀░░█░░░░▄▀░░░░█░░▄▀▄▀▄▀▄▀▄▀░░██░░▄▀░░█░░▄▀░░█\n"
+"███░░▄▀▄▀░░▄▀▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░██████████░░▄▀░░███░░▄▀░░███░░▄▀░░░░░░▄▀░░██░░▄▀░░█░░▄▀░░█\n"
+"███░░░░▄▀▄▀▄▀░░░░███░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░██░░░░░░██░░▄▀░░███░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░█\n"
+"█████░░░░▄▀░░░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░██░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░▄▀░░█\n"
+"███████░░▄▀░░███████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░██░░▄▀░░██░░▄▀░░███░░▄▀░░███░░▄▀░░██░░▄▀░░██░░▄▀░░█░░░░░░█\n"
+"███████░░▄▀░░███████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░████░░▄▀░░░░░░▄▀░░░░░░▄▀░░███░░▄▀░░███░░▄▀░░██░░▄▀░░░░░░▄▀░░████████\n"
+"███████░░▄▀░░███████░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░████░░▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀▄▀░░█░░░░▄▀░░░░█░░▄▀░░██░░▄▀▄▀▄▀▄▀▄▀░░█░░░░░░█\n"
+"███████░░▄▀░░███████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░████░░▄▀░░░░░░▄▀░░░░░░▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀░░██░░░░░░░░░░▄▀░░█░░▄▀░░█\n"
+"███████░░░░░░███████░░░░░░░░░░░░░░█░░░░░░░░░░░░░░████░░░░░░██░░░░░░██░░░░░░█░░░░░░░░░░█░░░░░░██████████░░░░░░█░░░░░░█\n"
+"█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████\n";
 			sleep(3);
 			ClearScreen();
 			XP = LvlWin();
@@ -1650,7 +1865,9 @@ void GameMenu() {
 		"╚══════╝╚══════╝░╚═════╝░╚══════╝╚═╝░░╚══╝╚═════╝░\n";
 
 	cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
-	cout << ascii;
+	
+	cout << ascii << endl;
+	
 
 	Lvl = LvlUp(XP, Lvl);
 	cout << username << endl;
@@ -1721,7 +1938,7 @@ void GameMenu() {
 	if(gameMenuChoice == "h"){
 		double sleep(0.5);
 		ClearScreen();
-		Credits();
+		SecondCredits();
 	}
 
 }
@@ -1733,6 +1950,7 @@ void Login()
 
 	fstream login;
 	login.open("login.dat", ios::out);
+	
 	cout <<
 		"██╗░░░░░░█████╗░░██████╗░██╗███╗░░██╗  ██╗\n"
 		"██║░░░░░██╔══██╗██╔════╝░██║████╗░██║  ╚═╝\n"
@@ -1740,6 +1958,7 @@ void Login()
 		"██║░░░░░██║░░██║██║░░╚██╗██║██║╚████║  ░░░\n"
 		"███████╗╚█████╔╝╚██████╔╝██║██║░╚███║  ██╗\n"
 		"╚══════╝░╚════╝░░╚═════╝░╚═╝╚═╝░░╚══╝  ╚═╝\n";
+		
 	cout << "\n\n\n\n\n\n\nUsername\n";
 	cout << "\n > ";
 	cin >> username;
@@ -1750,17 +1969,42 @@ void Login()
 	login << "Pass: " << password;
 	login.close();
 	cout << "loading...\n\n\n";
+	sleep(1);
+	ClearScreen();
 	cout << "(a) Start\n";
 	cin >> loginChoice;
 
 	if ((loginChoice == "a") || (loginChoice == "A")) {
+		ClearScreen();
+		ElementChange();
+	}
+}
+// Second set of credits
+void SecondCredits(){
+int creditsChoice;
+	cout << "\n\n\n\n\nCreator: Skyy \n\n";
+	cout << "\nConcept Creator and Writer: Evan \n\n"; 
+  cout << "\n\n\nMusic Writer: Temmiecat https://www.youtube.com/channel/UC59SDpvh9Zft8Vy-KDBJzew \n\n";
+  cout << "\n\n\nSpecial thanks to: \n                   Conner  \n               Kayleigh  \n\n";
+  	cout << "\nCaffeine: mccafferty \n\n";
+	cout << "(1) 	Back to Mode Select\n";
+	cout << "(2) 	Continue Game\n";
+	cin >> creditsChoice;
+	if (creditsChoice == 1) {
+		sleep(1);
+		ClearScreen();
+		Menu();
+	}
+	if (creditsChoice == 2) {
+		sleep(1);
+		ClearScreen();
 		GameMenu();
 	}
 }
 
 // StoryMode
 
-void StoryMode(void)
+void StoryMode()
 {
 	int storyModeChoice;
 	cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n-----------------Welcome to story mode!----------------\n\n";
@@ -1773,12 +2017,16 @@ void StoryMode(void)
 	}
 }
 
+
 // Credits
 void Credits() {
 
 	int creditsChoice;
 	cout << "\n\n\n\n\nCreator: Skyy Civil\n\n";
-	cout << "\nContent Creator: Evan \n\n"; 
+	cout << "\nConcept Creator and Writer: Evan \n\n";
+  cout << "\n\n\nMusic Writer: Temmiecat https://www.youtube.com/channel/UC59SDpvh9Zft8Vy-KDBJzew\n\n";
+  cout << "\n\n\nSpecial thanks to: \n                   Conner   \n               Kayleigh  \n                     Liam \n";
+  	cout << "\nCaffeine: Coffee \n\n";
 	cout << "(1) 	Back to menu\n";
 	cout << "(2) 	Continue to story mode\n";
 	cin >> creditsChoice;
@@ -1801,15 +2049,20 @@ void Menu()
 	string menuChoice;
 	int ui = 0;
 	while (ui == 0) {
+		
+		
 		cout <<
+
 			"███╗░░░███╗░█████╗░██████╗░███████╗  ░██████╗███████╗██╗░░░░░███████╗░█████╗░████████╗\n"
 			"████╗░████║██╔══██╗██╔══██╗██╔════╝  ██╔════╝██╔════╝██║░░░░░██╔════╝██╔══██╗╚══██╔══╝\n"
 			"██╔████╔██║██║░░██║██║░░██║█████╗░░  ╚█████╗░█████╗░░██║░░░░░█████╗░░██║░░╚═╝░░░██║░░░\n"
 			"██║╚██╔╝██║██║░░██║██║░░██║██╔══╝░░  ░╚═══██╗██╔══╝░░██║░░░░░██╔══╝░░██║░░██╗░░░██║░░░\n"
 			"██║░╚═╝░██║╚█████╔╝██████╔╝███████╗  ██████╔╝███████╗███████╗███████╗╚█████╔╝░░░██║░░░\n"
 			"╚═╝░░░░░╚═╝░╚════╝░╚═════╝░╚══════╝  ╚═════╝░╚══════╝╚══════╝╚══════╝░╚════╝░░░░╚═╝░░░\n";
+			
 		cout << "(a) Story Mode\n";
 		cout << "(b) Credits\n";
+		cout << "\n(c) Exit\n>";
 		cin >> menuChoice;
 		if ((menuChoice == "a") || (menuChoice == "A"))
 		{
@@ -1823,6 +2076,15 @@ void Menu()
 			ClearScreen();
 			Credits();
 		}
+		if (menuChoice == "c"){
+			sleep(1);
+			ClearScreen();
+			cout << "Game Exited\n";
+			double sleep(0.5);
+			ClearScreen();
+
+			return;
+		}
 
 	}
 };
@@ -1833,9 +2095,8 @@ int main()
 {
 	srand(time(NULL));
 	cout << "Loading...";
-	sleep(2);
+	double sleep(0.5);
 	cout << "Starting!";
-	sleep(1);
 	ClearScreen(); // Clear screen to avoid any issues with spacing...
 	Menu(); // run Menu functions
 }
