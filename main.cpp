@@ -327,6 +327,8 @@ void Upgrades(){
 "╚██████╔╝██║░░░░░╚██████╔╝██║░░██║██║░░██║██████╔╝███████╗██████╔╝\n"
 "░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝╚═════╝░╚══════╝╚═════╝░\n";
 	DrawLine();
+	upgradePrice1 == 100;
+	upgradePrice2 == 110;
 	cout << "\n\n";
 
 	cout << "\n(a) Weapon upgrades\n\n";
@@ -340,14 +342,21 @@ void Upgrades(){
 
 		if (weapons.item1 == weapons.equippedItem1){
 			cout << "Upgrade this weapon: " << weapons.equippedItem1 << "?" <<  endl;
-			cout << "(a) Confirm\n(b) Cancel\n> ";
+			cout << "(a) Confirm\n(b) Cancel\n ";
+			cout << "Price: 100 C\n>";
 			cin >> op;
 			if (op == "a"){
-				cout << "Price: 100 C\n";
+				if(coins >= upgradePrice1){
+					// Setting values to add to damage and next price
+					upgradePrice1+= 100;
+					attacks.damageAttack5 += 30;
+					attacks.daageAttack6 += 50;
+					attacks.damageAttack7 +=30
+				}
 			}
 			if (op =="b")
 			{
-				cout << "WIP";
+				GameMenu();
 			} 
 			}
 
