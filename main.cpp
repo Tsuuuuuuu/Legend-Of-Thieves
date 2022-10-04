@@ -316,6 +316,8 @@ int LvlUp(int XP, int Lvl) {
 
 void Upgrades(){
 	// Upgrades tab soon
+	int UpgradeCount;
+	
 	string op;
 	string upgradeChoice;
 	DrawLine(); cout << endl;
@@ -327,8 +329,11 @@ void Upgrades(){
 "╚██████╔╝██║░░░░░╚██████╔╝██║░░██║██║░░██║██████╔╝███████╗██████╔╝\n"
 "░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝╚═╝░░░╚═╝╚═════╝░╚══════╝╚═════╝░\n";
 	DrawLine();
-	upgradePrice1 == 100;
-	upgradePrice2 == 110;
+	int UpgradePrice;
+	// Set upgrade price to be 100 at start. Then it can be changed afterwards
+	while (UpgradeCount < 1){
+	UpgradePrice = 100;	
+	}
 	cout << "\n\n";
 
 	cout << "\n(a) Weapon upgrades\n\n";
@@ -346,23 +351,27 @@ void Upgrades(){
 			cout << "Price: 100 C\n>";
 			cin >> op;
 			if (op == "a"){
-				if(coins >= upgradePrice1){
+				if(coins >= upgradePrice){
 					// Setting values to add to damage and next price
 					upgradePrice1+= 100;
 					attacks.damageAttack5 += 30;
 					attacks.daageAttack6 += 50;
 					attacks.damageAttack7 +=30
+						// Add 1 for each upgrade
+						UpgradeCount +=1;
+					cout << "Upgraded item!\n\n" << Attacks.attack5 <<": " << Attacks.damageAttack5";
 				}
 			}
 			if (op =="b")
 			{
-				GameMenu();
+				// Direct user back to function
+				Upgrades();
 			} 
 			}
 
 		if (weapons.item2 == weapons.equippedItem2){
 			cout << "Upgrade this weapon: " << weapons.equippedItem2  << "?" << endl;
-
+			
 			}
 
 		if (weapons.item3 == weapons.equippedItem3){
