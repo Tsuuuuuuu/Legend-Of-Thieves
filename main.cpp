@@ -2098,7 +2098,7 @@ void Credits() {
 
 	int creditsChoice;
 	cout << "\n\n\n\n\nCreator: Skyy Civil\n\n";
-
+	cout << "Concepts Dev: Destiny Naiomi Reyes \n";
   cout << "\n\n\nMusic Writer: Temmiecat https://www.youtube.com/channel/UC59SDpvh9Zft8Vy-KDBJzew\n\n";
  
   	cout << "\t\t\t\t\t\t\t\t\t\t BETA TESTERS\n\n\n";
