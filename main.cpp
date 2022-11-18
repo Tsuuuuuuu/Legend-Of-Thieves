@@ -322,7 +322,8 @@ void Upgrades() {
 	int UpgradePrice;
 	string op;
 	string upgradeChoice;
-	DrawLine(); cout << endl;
+	DrawLine(); 
+	cout << endl;
 	cout <<
 		"██╗░░░██╗██████╗░░██████╗░██████╗░░█████╗░██████╗░███████╗░██████╗\n"
 		"██║░░░██║██╔══██╗██╔════╝░██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝\n"
@@ -354,7 +355,9 @@ void Upgrades() {
 			cout << "(a) Confirm\n(b) Cancel\n ";
 			cout << "Price: 100 C\n>";
 			cin >> op;
+			// If user enters a
 			if (op == "a") {
+				
 				if (coins >= upgradePrice) {
 					// Remove player money
 					coins -= UpgradePrice;
@@ -505,9 +508,9 @@ void Upgrades() {
 
 
 						}
-
+						// Magic upgrades
 						if (upgradeChoice == "b") {
-
+							cout << "Choose what you wish to upgrade" << endl << DrawLine();
 						}
 
 
