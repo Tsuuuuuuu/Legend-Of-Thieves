@@ -211,6 +211,10 @@ struct WeaponStats {
 	int power;
 };
 
+struct Boss {
+int bossHP;
+string bossName;
+}
 struct
 
 
@@ -369,8 +373,8 @@ void Upgrades() {
 						// Add 1 for each upgrade
 						UpgradeCount += 1;
 					cout << "Upgraded item!\n";
-					cout << "(a) Menu \n> "
-						cin >> "op";
+					cout << "(a) Menu \n> ";
+						cin >> op;
 					if (op == "a") {
 						Upgrades();
 					}
@@ -400,8 +404,8 @@ void Upgrades() {
 						// Add 1 for each upgrade
 						UpgradeCount += 1;
 					cout << "Upgraded item!\n";
-					cout << "(a) Menu \n> "
-						cin >> "op";
+					cout << "(a) Menu \n> ";
+						cin >> op;
 					if (op == "a") {
 						Upgrades();
 					}
@@ -425,8 +429,8 @@ void Upgrades() {
 							// Add 1 for each upgrade
 							UpgradeCount += 1;
 						cout << "Upgraded item!\n";
-						cout << "(a) Menu \n> "
-							cin >> "op";
+						cout << "(a) Menu \n> ";
+							cin >> op;
 						if (op == "a") {
 							Upgrades();
 						}
@@ -449,8 +453,8 @@ void Upgrades() {
 								// Add 1 for each upgrade
 								UpgradeCount += 1;
 							cout << "Upgraded item!\n";
-							cout << "(a) Menu \n> "
-								cin >> "op";
+							cout << "(a) Menu \n> ";
+								cin >> op;
 							if (op == "a") {
 								Upgrades();
 							}
@@ -473,8 +477,8 @@ void Upgrades() {
 									// Add 1 for each upgrade
 									UpgradeCount += 1;
 								cout << "Upgraded item!\n";
-								cout << "(a) Menu \n> "
-									cin >> "op";
+								cout << "(a) Menu \n> ";
+									cin >> op;
 								if (op == "a") {
 									Upgrades();
 								}
@@ -497,8 +501,8 @@ void Upgrades() {
 										// Add 1 for each upgrade
 										UpgradeCount += 1;
 									cout << "Upgraded item!\n";
-									cout << "(a) Menu \n> "
-										cin >> "op";
+									cout << "(a) Menu \n> ";
+										cin >> op;
 									if (op == "a") {
 										Upgrades();
 									}
