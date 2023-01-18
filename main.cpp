@@ -4,13 +4,10 @@ Creator of game: Skyy Civil
 //   LEGEND: TEXT ADVENTURE VERSION   \\
 #include <stdlib.h>
 #include <iostream>
-
 #include <cstring>
 #include <fstream>
 #include <random>
 #include <vector>
-
-
 using namespace std;
 
 /*
@@ -55,7 +52,7 @@ int Upgrade();
 int WeaponStats();
 int MonsterLevelUp();
 void Arsenal();
-
+void BossFight();
 /* No files, struct instead.
 
 structing monsters and hero and damage
@@ -77,6 +74,8 @@ struct Hero {
 	int health;
 	int mana;
 };
+
+
 
 // Create shop choices
 
@@ -212,10 +211,12 @@ struct WeaponStats {
 };
 
 struct Boss {
-int bossHP;
-string bossName;
-}
-struct
+	// general values
+	int BHealth;
+	//attack names
+	string BossAttack;
+	int BossDamage;
+};
 
 
 /*
@@ -232,6 +233,7 @@ struct Element elems;
 struct WeaponShop weapons;
 struct WeaponStats weaponStat;
 struct WeaponStats weaponStatC;
+struct Boss Test;
 
 
 // Ascii global constructors
@@ -272,6 +274,8 @@ void DrawLine() {
 
 
 /*
+*                                         |||||
+*  these are the global integer functions vvvvv
 Requirements for leveling Leveling up
 */
 
@@ -313,8 +317,43 @@ int LvlUp(int XP, int Lvl) {
 
 }
 
+/*
+bossfights
+*/
 
-
+void BossFight() {
+	int atk;
+	Test.BHealth = 500;
+	int BossCount;
+	// Boss attacks and stats
+	string BossName[3] = { "Talus", "Blink", "Taurus" };
+	string BossMove[5] = { "Body Slam", "Spinning Throw", "Charged Slam", "Crushing Fist", "Skull Crack" };
+	int BossAttack[6] = { 10, 30, 15, 20, 13, 40 };
+	// While player is alive
+	while (BossCount >= 1) {
+		int RandName = rand() % 2;
+		cout << "Boss Name: " << BossName[RandName];
+		cout << "Boss Health: " << Test.BHealth << endl;
+		cout << "Player Health: " << player.health;
+		cout << "Melee attacks: " << endl << "(1) " << playerAttacks.attack1 << endl;
+		cout << "(2) " << playerAttacks.attack2 << endl;
+		cout << "(3) " << playerAttacks.attack3 << endl;
+		cout << "(4) " << playerAttacks.attack4 << endl;
+		// Magic
+		cout << "\n\n Magic Attacks" << endl;
+		cout << "(5) " << playerAttacks.attack5;
+		cout << "(6) " << playerAttacks.attack6;
+		cout << "(7) " << playerAttacks.attack7;
+		cin >> atk;
+		if (atk == 1){
+			// remove boss health uwu
+			Test.BHealth -= playerAttacks.damageAttack1; \
+			int RandDmg = rand() % 6;
+			int RandAtk = rand() % 5;
+			cout << "You used " << playerAttacks.attack1 << " and dealt " << playerAttacks.damageAttack1 << endl;
+			cout << BossName << " used " << BossMove[RandAtk] << " and dealt " << BossAttack[RandDmg] << endl;
+		}
+}
 
 /*
 	Upgrades
@@ -326,8 +365,7 @@ void Upgrades() {
 	int UpgradePrice;
 	string op;
 	string upgradeChoice;
-	DrawLine(); 
-	cout << endl;
+	DrawLine(); cout << endl;
 	cout <<
 		"██╗░░░██╗██████╗░░██████╗░██████╗░░█████╗░██████╗░███████╗░██████╗\n"
 		"██║░░░██║██╔══██╗██╔════╝░██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝\n"
@@ -359,9 +397,7 @@ void Upgrades() {
 			cout << "(a) Confirm\n(b) Cancel\n ";
 			cout << "Price: 100 C\n>";
 			cin >> op;
-			// If user enters a
 			if (op == "a") {
-				
 				if (coins >= upgradePrice) {
 					// Remove player money
 					coins -= UpgradePrice;
@@ -373,8 +409,8 @@ void Upgrades() {
 						// Add 1 for each upgrade
 						UpgradeCount += 1;
 					cout << "Upgraded item!\n";
-					cout << "(a) Menu \n> ";
-						cin >> op;
+					cout << "(a) Menu \n> "
+						cin >> "op";
 					if (op == "a") {
 						Upgrades();
 					}
@@ -404,8 +440,8 @@ void Upgrades() {
 						// Add 1 for each upgrade
 						UpgradeCount += 1;
 					cout << "Upgraded item!\n";
-					cout << "(a) Menu \n> ";
-						cin >> op;
+					cout << "(a) Menu \n> "
+						cin >> "op";
 					if (op == "a") {
 						Upgrades();
 					}
@@ -429,8 +465,8 @@ void Upgrades() {
 							// Add 1 for each upgrade
 							UpgradeCount += 1;
 						cout << "Upgraded item!\n";
-						cout << "(a) Menu \n> ";
-							cin >> op;
+						cout << "(a) Menu \n> "
+							cin >> "op";
 						if (op == "a") {
 							Upgrades();
 						}
@@ -453,8 +489,8 @@ void Upgrades() {
 								// Add 1 for each upgrade
 								UpgradeCount += 1;
 							cout << "Upgraded item!\n";
-							cout << "(a) Menu \n> ";
-								cin >> op;
+							cout << "(a) Menu \n> "
+								cin >> "op";
 							if (op == "a") {
 								Upgrades();
 							}
@@ -477,8 +513,8 @@ void Upgrades() {
 									// Add 1 for each upgrade
 									UpgradeCount += 1;
 								cout << "Upgraded item!\n";
-								cout << "(a) Menu \n> ";
-									cin >> op;
+								cout << "(a) Menu \n> "
+									cin >> "op";
 								if (op == "a") {
 									Upgrades();
 								}
@@ -501,8 +537,8 @@ void Upgrades() {
 										// Add 1 for each upgrade
 										UpgradeCount += 1;
 									cout << "Upgraded item!\n";
-									cout << "(a) Menu \n> ";
-										cin >> op;
+									cout << "(a) Menu \n> "
+										cin >> "op";
 									if (op == "a") {
 										Upgrades();
 									}
@@ -512,9 +548,9 @@ void Upgrades() {
 
 
 						}
-						// Magic upgrades
+
 						if (upgradeChoice == "b") {
-							cout << "Choose what you wish to upgrade" << endl << DrawLine();
+
 						}
 
 
@@ -523,6 +559,7 @@ void Upgrades() {
 
 					int Casino()
 					{
+					
 						int ui = 100;
 
 						int amount; // hold player's balance amount
@@ -767,8 +804,6 @@ void Upgrades() {
 
 
 							}
-
-
 
 
 							if (CodexChoice == "b") {
@@ -1319,6 +1354,8 @@ void Upgrades() {
 
 
 
+
+
 						int PwrUpCnt = 1;
 
 						// Inventory
@@ -1520,6 +1557,8 @@ void Upgrades() {
 
 						string monsterAttack[5] = { "Bash", "Spin Attack", "Heavy Punch", "Blind Rage", "Power Combo" };
 						int monsterAttackDamage[8] = { 0, 10, 15, 40, 18, 5, 30, 50 };
+
+						
 
 
 
